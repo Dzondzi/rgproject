@@ -79,7 +79,7 @@ unsigned int initBuffers() {
 
 void renderBox(int i, int j, int type, unsigned int VAO, Shader shader,std::vector<Texture> teksture){
 
-    glm::mat4 view = glm::lookAt(glm::vec3(11.0f,-11.0f,sin(glfwGetTime())*10 +20), glm::vec3(11.0f,-11.0f,0.0f) , glm::vec3(0.0f,0.1f,0.0f));
+    glm::mat4 view = glm::lookAt(glm::vec3(11.0f,-11.0f,sin(glfwGetTime())*30 +20), glm::vec3(11.0f,-11.0f,0.0f) , glm::vec3(0.0f,0.1f,0.0f));
     shader.setMat4("view", view);
 
     teksture[type].activateTexture(0);
@@ -94,4 +94,9 @@ void renderBox(int i, int j, int type, unsigned int VAO, Shader shader,std::vect
     glBindVertexArray(VAO);
     glDrawArrays(GL_TRIANGLES,0,36);
 
+    model = glm::translate(model, glm::vec3(0.0,0.0, -1.0));
+    shader.setMat4("model", model);
+    teksture[6].activateTexture(0);
+    teksture[6].activateTexture(1);
+    glDrawArrays(GL_TRIANGLES,0,36);
 }
