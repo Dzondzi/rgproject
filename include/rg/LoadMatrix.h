@@ -5,12 +5,11 @@
 #ifndef PROJECT_BASE_LOADMATRIX_H
 #define PROJECT_BASE_LOADMATRIX_H
 
+
 #include <vector>
 #include <iostream>
 #include <learnopengl/filesystem.h>
 #include <fstream>
-
-
 
 
 class Matrix{
@@ -22,10 +21,15 @@ public:
     Matrix(std::string filePath){
         std::ifstream myfile;
         myfile.open(filePath);
-     //   ASSERT(myfile,"myfile failed to open");
+        if(!myfile){
+            std::cerr << "myfile failed to open \n";
+            exit(EXIT_FAILURE);
+        }
         myfile >> n >> m;
-       // ASSERT(n > -1, "n > 0");
-       // ASSERT(m > -1, "m > 0");
+       if(n < 1 || m < 1){
+           std::cerr << "n or m < 1 \n";
+           exit(EXIT_FAILURE);
+       }
         std::cerr << n << " " <<m;
         std::vector<unsigned int> pom(m);
         int x;

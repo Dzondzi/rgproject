@@ -15,7 +15,6 @@
 #define SCR_HEIGHT 600
 
 extern GLFWwindow* window;
-
 void ourGlfwInit();
 void processInput(GLFWwindow *window);
 

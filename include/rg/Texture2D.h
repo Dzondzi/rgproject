@@ -7,6 +7,7 @@
 #include <glad/glad.h>
 #include <stb_image.h>
 #include <learnopengl/filesystem.h>
+#include <iostream>
 
 
 class Texture
@@ -64,7 +65,11 @@ public:
 
     void activateTexture(int value){
         glActiveTexture(GL_TEXTURE0 + value);
-        glBindTexture(GL_TEXTURE_2D, tex);
+        glBindTexture(GL_TEXTURE_2D, this->tex);
+    }
+
+    unsigned int getTex(){
+        return tex;
     }
 };
 
