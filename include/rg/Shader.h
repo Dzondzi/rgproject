@@ -1,7 +1,6 @@
 //
 // Created by matf-rg on 30.10.20..
 //
-
 #ifndef PROJECT_BASE_SHADER_H
 #define PROJECT_BASE_SHADER_H
 
@@ -10,7 +9,6 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include <rg/Error.h>
 #include <common.h>
 #include <glm/glm.hpp>
 class Shader {
@@ -23,7 +21,10 @@ public:
         // ------------------------------------
         // vertex shader
         std::string vsString = readFileContents(vertexShaderPath);
-        ASSERT(!vsString.empty(), "Vertex shader source is empty!");
+        if(vsString.empty()){
+            std::cerr << "Vertex shader source is empry!";
+            exit(EXIT_FAILURE);
+        }
         const char* vertexShaderSource = vsString.c_str();
         int vertexShader = glCreateShader(GL_VERTEX_SHADER);
         glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
@@ -40,7 +41,10 @@ public:
         // fragment shader
         int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
         std::string fsString = readFileContents(fragmentShaderPath);
-        ASSERT(!fsString.empty(), "Fragment shader empty!");
+        if(fsString.empty()){
+            std::cerr << "Fragment shader source is empry!";
+            exit(EXIT_FAILURE);
+        }
         const char* fragmentShaderSource = fsString.c_str();
         glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
         glCompileShader(fragmentShader);

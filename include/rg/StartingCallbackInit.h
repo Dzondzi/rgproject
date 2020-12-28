@@ -1,6 +1,7 @@
 //
 // Created by dzondzi on 27.12.20..
 //
+#pragma once
 
 #ifndef PROJECT_BASE_STARTINCALLBACKINIT_H
 #define PROJECT_BASE_STARTINCALLBACKINIT_H
