@@ -6,7 +6,6 @@
 #define PROJECT_BASE_TEXTURE2D_H
 #include <glad/glad.h>
 #include <stb_image.h>
-#include <rg/Error.h>
 #include <learnopengl/filesystem.h>
 
 
