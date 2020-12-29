@@ -14,6 +14,7 @@ std::vector<Texture> initTextures(){
     Texture tex4("resources/textures/blueghostPM.png");
     Texture tex5("resources/textures/pm.png");
     Texture tex6("resources/textures/mincrgrass.jpg");
+    Texture tex7("resources/textures/white.png");
 
 
 
@@ -24,6 +25,8 @@ std::vector<Texture> initTextures(){
     teksture.push_back(tex4);
     teksture.push_back(tex5);
     teksture.push_back(tex6);
+    teksture.push_back(tex7);
+
 
 
     return teksture;

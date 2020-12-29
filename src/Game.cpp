@@ -3,7 +3,7 @@
 //
 
 #include <rg/Game.h>
-#include <rg/Camera.h>
+#include <rg/StartingGlfwInit.h>
 
 
 unsigned int initBuffers() {
@@ -77,13 +77,23 @@ unsigned int initBuffers() {
 }
 
 
-void renderBox(int i, int j, int type, unsigned int VAO, Shader shader,std::vector<Texture> teksture){
+void renderBox(int i, int j, int type, unsigned int VAO, Shader shader,std::vector<Texture> teksture, ourCamera camera){
 
-    glm::mat4 view = glm::lookAt(glm::vec3(11.0f,-11.0f,sin(glfwGetTime())*30 +20), glm::vec3(11.0f,-11.0f,0.0f) , glm::vec3(0.0f,0.1f,0.0f));
+    if(type == 0)
+        return;
+
+    glm::mat4 view = camera.GetViewMatrix();
     shader.setMat4("view", view);
+
+    glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+    shader.setMat4("projection", projection);
 
     teksture[type].activateTexture(0);
     teksture[type].activateTexture(1);
+
+
+
+
 
     glBindVertexArray(VAO);
 

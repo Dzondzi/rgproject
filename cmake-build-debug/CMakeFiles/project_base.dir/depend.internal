@@ -3,12 +3,13 @@
 
 CMakeFiles/project_base.dir/src/Game.cpp.o
  ../include/learnopengl/filesystem.h
- ../include/rg/Camera.h
  ../include/rg/Game.h
  ../include/rg/LoadMatrix.h
  ../include/rg/MatrixChanges1.h
  ../include/rg/Shader.h
+ ../include/rg/StartingGlfwInit.h
  ../include/rg/Texture2D.h
+ ../include/rg/ourCamera.h
  ../include/stb_image.h
  ../libs/glad/include/KHR/khrplatform.h
  ../libs/glad/include/glad/glad.h
@@ -49,7 +50,6 @@ CMakeFiles/project_base.dir/src/StartingGlfwInit.cpp.o
  /home/dzondzi/Desktop/grafa/rgproject/src/StartingGlfwInit.cpp
 CMakeFiles/project_base.dir/src/main.cpp.o
  ../include/learnopengl/filesystem.h
- ../include/rg/Camera.h
  ../include/rg/Game.h
  ../include/rg/LoadMatrix.h
  ../include/rg/LoadTextures.h
@@ -58,6 +58,7 @@ CMakeFiles/project_base.dir/src/main.cpp.o
  ../include/rg/StartingCallbackInit.h
  ../include/rg/StartingGlfwInit.h
  ../include/rg/Texture2D.h
+ ../include/rg/ourCamera.h
  ../include/stb_image.h
  ../libs/glad/include/KHR/khrplatform.h
  ../libs/glad/include/glad/glad.h

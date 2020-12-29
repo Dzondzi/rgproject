@@ -14,8 +14,9 @@
 #include <iostream>
 #include <stb_image.h>
 #include <rg/Texture2D.h>
+#include <rg/ourCamera.h>
 
 unsigned int initBuffers();
-void renderBox(int i, int j, int type, unsigned int VAO, Shader shader, std::vector<Texture> teksture);
+void renderBox(int i, int j, int type, unsigned int VAO, Shader shader, std::vector<Texture> teksture, ourCamera camera);
 
 #endif //PROJECT_BASE_GAME_H

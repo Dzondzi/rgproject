@@ -242,6 +242,9 @@
 		<Unit filename="/home/dzondzi/Desktop/grafa/rgproject/include/rg/RenderCube.h">
 			<Option target="project_base"/>
 		</Unit>
+		<Unit filename="/home/dzondzi/Desktop/grafa/rgproject/include/rg/ourCamera.h">
+			<Option target="project_base"/>
+		</Unit>
 		<Unit filename="/home/dzondzi/Desktop/grafa/rgproject/libs/glad/include/glad/glad.h">
 			<Option target="glad"/>
 		</Unit>
