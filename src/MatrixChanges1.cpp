@@ -16,22 +16,9 @@ void initMatrix(std::string path){
     matrica = matrix.getMatrix();
 }
 
-void changingMatrixInput(GLFWwindow* window){
-    if(glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS ){
-
-    }
-    if(glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS ){
-
-    }
-    if(glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS ){
-
-    }
-    if(glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS ){
-
-    }
 
 
-}
+
 
 
 

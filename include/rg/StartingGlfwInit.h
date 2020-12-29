@@ -16,7 +16,6 @@
 
 extern GLFWwindow* window;
 void ourGlfwInit();
-void processInput(GLFWwindow *window);
 
 
 #endif //PROJECT_BASE_STARTINGGLFWINIT_H

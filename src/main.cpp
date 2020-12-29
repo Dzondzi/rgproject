@@ -12,9 +12,12 @@
 #include <rg/LoadTextures.h>
 #include <rg/ourCamera.h>
 
-
+std::pair<int,int> findPosition(std::vector<std::vector<unsigned int>> matrica, int n, int m);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
+void pm_key_callback(GLFWwindow *window, int key, int scancode, int action, int mods);
+void processInput(GLFWwindow *window);
+bool isAllowedMove(std::vector<std::vector<unsigned int>> matrica, int i, int j);
 
 float deltaTime = 0.0f;	// time between current frame and last frame
 float lastFrame = 0.0f;
@@ -24,16 +27,20 @@ float lastX = SCR_WIDTH / 2.0f;
 float lastY = SCR_HEIGHT / 2.0f;
 bool firstMouse = true;
 
+std::pair<int,int> currPos;
 
 int main(){
     ourGlfwInit();
     ourCallbackInit();
     glfwSetCursorPosCallback(window, mouse_callback);
     glfwSetScrollCallback(window, scroll_callback);
+
     //ucitavanje matrice matrica
     initMatrix("resources/map/map01.txt");
 
+
     std::vector<Texture> teksture = initTextures();
+
 
     Shader shader("resources/shaders/cubeShader.vs", "resources/shaders/cubeShader.fs");
     unsigned int VAO = initBuffers();
@@ -46,7 +53,9 @@ int main(){
     shader.setInt("texture1", 0);
     shader.setInt("texture2", 1);
 
+    currPos = findPosition(matrica,n,m);
 
+    glfwSetKeyCallback(window, pm_key_callback);
 
 
     while (!glfwWindowShouldClose(window))
@@ -58,7 +67,7 @@ int main(){
         lastFrame = currentFrame;
 
         processInput(window);
-        changingMatrixInput(window);
+       // changingMatrixInput(window, currPos);
         kamera.keyboardInput(window, deltaTime);
 
         // render
@@ -115,4 +124,74 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
     kamera.ProcessMouseScroll(yoffset);
+}
+
+void processInput(GLFWwindow *window)
+{
+    if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+        glfwSetWindowShouldClose(window, true);
+
+}
+std::pair<int,int> findPosition(std::vector<std::vector<unsigned int>> matrica, int n, int m){
+    for(int i = 0; i < n; i++){
+        for(int j = 0; j < m; j++){
+            if(matrica[i][j] == 5)
+                return std::make_pair(i,j);
+        }
+    }
+    return std::make_pair(0,0);
+
+}
+
+bool isAllowedMove(std::vector<std::vector<unsigned int>> matrica, int i, int j){
+    if(matrica[i][j] == 2 || matrica[i][j] == 0 || matrica[i][j] == 7)
+        return true;
+    return false;
+}
+
+void pm_key_callback(GLFWwindow *window, int key, int scancode, int action, int mods){
+
+    int i = currPos.first;
+    int j = currPos.second;
+
+
+
+    if(key == GLFW_KEY_DOWN  && action == GLFW_PRESS ){
+        if(isAllowedMove(matrica,i+1,j)){
+            matrica[i][j] = 7;
+            matrica[i+1][j] = 5;
+            currPos = std::make_pair(i+1,j);
+        }
+    }
+    else if(glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS ){
+        if(isAllowedMove(matrica,i-1,j)){
+            matrica[i][j] = 7;
+            matrica[i-1][j] = 5;
+            currPos = std::make_pair(i-1,j);
+
+        }
+    }
+    else if(glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS ){
+        if(isAllowedMove(matrica,i,j-1)){
+            matrica[i][j] = 7;
+            matrica[i][j-1] = 5;
+            currPos = std::make_pair(i,j-1);
+        }
+    }
+    else if(glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS ){
+        if(isAllowedMove(matrica,i,j+1)){
+            matrica[i][j] = 7;
+            matrica[i][j+1] = 5;
+            currPos = std::make_pair(i,j+1);
+
+        }
+    }
+
+
+    if (key == GLFW_KEY_F && action == GLFW_PRESS) {
+        glfwMaximizeWindow(window);
+    }
+    if (key == GLFW_KEY_R && action == GLFW_PRESS) {
+        glfwRestoreWindow(window);
+    }
 }

@@ -8,8 +8,9 @@ std::vector<Texture> initTextures(){
     std::vector<Texture> teksture;
 
     Texture tex0("resources/textures/container.jpg");
-    Texture tex1("resources/textures/awesomeface.png");
-    Texture tex2("resources/textures/bricks2.jpg");
+    Texture tex1("resources/textures/bricks2.jpg");
+
+    Texture tex2("resources/textures/awesomeface.png");
     Texture tex3("resources/textures/redpm.png");
     Texture tex4("resources/textures/blueghostPM.png");
     Texture tex5("resources/textures/pm.png");
