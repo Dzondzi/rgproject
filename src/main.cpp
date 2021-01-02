@@ -51,7 +51,6 @@ int main(){
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
   //  glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     shader.setInt("texture1", 0);
-    shader.setInt("texture2", 1);
 
     currPos = findPosition(matrica,n,m);
 
@@ -156,19 +155,19 @@ void pm_key_callback(GLFWwindow *window, int key, int scancode, int action, int 
 
 
 
-    if(key == GLFW_KEY_DOWN  && action == GLFW_PRESS ){
-        if(isAllowedMove(matrica,i+1,j)){
-            matrica[i][j] = 7;
-            matrica[i+1][j] = 5;
-            currPos = std::make_pair(i+1,j);
-        }
-    }
-    else if(glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS ){
+
+    if(glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS ){
         if(isAllowedMove(matrica,i-1,j)){
             matrica[i][j] = 7;
             matrica[i-1][j] = 5;
             currPos = std::make_pair(i-1,j);
-
+        }
+    }
+    else if(key == GLFW_KEY_DOWN  && action == GLFW_PRESS ){
+        if(isAllowedMove(matrica,i+1,j)){
+            matrica[i][j] = 7;
+            matrica[i+1][j] = 5;
+            currPos = std::make_pair(i+1,j);
         }
     }
     else if(glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS ){
@@ -177,13 +176,20 @@ void pm_key_callback(GLFWwindow *window, int key, int scancode, int action, int 
             matrica[i][j-1] = 5;
             currPos = std::make_pair(i,j-1);
         }
+        if(i == 9 && j == 0){
+            currPos = std::make_pair(9,20);
+            matrica[9][20] = 5;
+        }
     }
     else if(glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS ){
         if(isAllowedMove(matrica,i,j+1)){
             matrica[i][j] = 7;
             matrica[i][j+1] = 5;
             currPos = std::make_pair(i,j+1);
-
+        }
+        if(i == 9 && j == 20){
+            currPos = std::make_pair(9,0);
+            matrica[9][0] = 5;
         }
     }
 

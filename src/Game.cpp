@@ -103,7 +103,6 @@ void renderBox(int i, int j, int type, unsigned int VAO, Shader shader,std::vect
     }
 
     teksture[type].activateTexture(0);
-    teksture[type].activateTexture(1);
 
 
     glBindVertexArray(VAO);

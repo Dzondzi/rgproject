@@ -9,6 +9,7 @@ std::vector<std::vector<unsigned int>> matrica;
 int n;
 int m;
 
+
 void initMatrix(std::string path){
     Matrix matrix(path);
     n = matrix.getN();
@@ -16,6 +17,9 @@ void initMatrix(std::string path){
     matrica = matrix.getMatrix();
 }
 
+void restartMatrix(){
+
+}
 
 
 
