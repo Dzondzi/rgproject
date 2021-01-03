@@ -96,6 +96,8 @@ void renderBox(int i, int j, int type, unsigned int VAO, Shader shader,std::vect
             glm::vec3( 0.0f,  0.0f, -3.0f)
     };
 
+
+    //IZMENITI SMESTITI U FUNKCIJE
     shader.setVec3("dirLight.direction", -0.2f, -1.0f, -0.3f);
     shader.setVec3("dirLight.ambient", 0.05f, 0.05f, 0.05f);
     shader.setVec3("dirLight.diffuse", 0.4f, 0.4f, 0.4f);
@@ -133,17 +135,12 @@ void renderBox(int i, int j, int type, unsigned int VAO, Shader shader,std::vect
     shader.setFloat("pointLights[3].linear", 0.09);
     shader.setFloat("pointLights[3].quadratic", 0.032);
 
+
     glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
     shader.setMat4("projection", projection);
 
     glm::mat4 view = camera.GetViewMatrix();
     shader.setMat4("view", view);
-
-    glm::mat4 model = glm::mat4(1.0f); // make sure to initialize matrix to identity matrix first
-    model = glm::translate(model, glm::vec3((float)(i),(float)(0-j), 0.0));
-    model = glm::scale(model, scalingVector);
-
-    shader.setMat4("model", model);
 
     if(type == 2){
         scalingVector*=0.2;
@@ -153,27 +150,39 @@ void renderBox(int i, int j, int type, unsigned int VAO, Shader shader,std::vect
     if(type == 7){
         scalingVector*=0.001f;
         unscalingVector*=1000.f;
-
     }
 
-    teksture[type].activateTexture(type);
-    shader.setInt("material.diffuse", teksture[type].getTex());
-    shader.setInt("material.specular", teksture[type].getTex());
+    glm::mat4 model = glm::mat4(1.0f); // make sure to initialize matrix to identity matrix first
+    model = glm::translate(model, glm::vec3((float)(i),(float)(0-j), 0.0));
+    model = glm::scale(model, scalingVector);
 
-    glBindVertexArray(VAO);
+    shader.setMat4("model", model);
 
 
     shader.use();
+    teksture[type].activateTexture(type);
+    shader.setInt("material.diffuse", type);
+    shader.setInt("material.specular", type);
 
 
     glBindVertexArray(VAO);
+
+    shader.use();
+
+    glBindVertexArray(VAO);
     glDrawArrays(GL_TRIANGLES,0,36);
+
+//donja strana mape
 
 
     model = glm::scale(model,unscalingVector);
     model = glm::translate(model, glm::vec3(0.0,0.0, -1.0));
     shader.setMat4("model", model);
-    teksture[6].activateTexture(0);
-    teksture[6].activateTexture(1);
+
+    teksture[6].activateTexture(6);
+    teksture[10].activateTexture(10);
+    shader.setInt("material.diffuse", 1);
+    shader.setInt("material.specular", 10);
+
     glDrawArrays(GL_TRIANGLES,0,36);
 }

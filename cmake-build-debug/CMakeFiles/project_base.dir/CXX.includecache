@@ -144,7 +144,7 @@ stdint.h
 KHR/khrplatform.h
 -
 
-/home/marko/Desktop/PROJEKAT/rgproject/src/Game.cpp
+/home/dzondzi/Desktop/rgproject/src/Game.cpp
 rg/Game.h
 -
 rg/StartingGlfwInit.h

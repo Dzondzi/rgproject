@@ -6,5 +6,5 @@ CXX_FLAGS = -Wall -Wextra -Wno-unused-variable -Wno-unused-parameter -O3 -g   -s
 
 CXX_DEFINES = -DIMGUI_IMPL_OPENGL_LOADER_GLAD
 
-CXX_INCLUDES = -I/home/marko/Desktop/PROJEKAT/rgproject/cmake-build-debug/configuration -I/home/marko/Desktop/PROJEKAT/rgproject/include -I/home/marko/Desktop/PROJEKAT/rgproject/libs/glad/include -I/home/marko/Desktop/PROJEKAT/rgproject/libs/imgui/include 
+CXX_INCLUDES = -I/home/dzondzi/Desktop/rgproject/cmake-build-debug/configuration -I/home/dzondzi/Desktop/rgproject/include -I/home/dzondzi/Desktop/rgproject/libs/glad/include -I/home/dzondzi/Desktop/rgproject/libs/imgui/include 
 

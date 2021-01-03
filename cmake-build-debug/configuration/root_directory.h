@@ -1,1 +1,1 @@
-static const char * logl_root = "/home/marko/Desktop/PROJEKAT/rgproject";
+static const char * logl_root = "/home/dzondzi/Desktop/rgproject";
