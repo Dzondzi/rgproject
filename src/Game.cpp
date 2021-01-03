@@ -102,7 +102,7 @@ void renderBox(int i, int j, int type, unsigned int VAO, Shader shader,std::vect
 //    shader.setDirLight();
 //    shader.setPointLight();
 
-    shader.setVec3("dirLight.direction", -0.2f, -1.0f, -0.3f);
+    shader.setVec3("dirLight.direction", 0.0f, 0.0f, -1.f);
     shader.setVec3("dirLight.ambient", 0.05f, 0.05f, 0.05f);
     shader.setVec3("dirLight.diffuse", 0.4f, 0.4f, 0.4f);
     shader.setVec3("dirLight.specular", 0.5f, 0.5f, 0.5f);
@@ -156,6 +156,8 @@ void renderBox(int i, int j, int type, unsigned int VAO, Shader shader,std::vect
         unscalingVector*=1000.f;
     }
 
+
+
     glm::mat4 model = glm::mat4(1.0f); // make sure to initialize matrix to identity matrix first
     model = glm::translate(model, glm::vec3((float)(i),(float)(0-j), 0.0));
     model = glm::scale(model, scalingVector);
@@ -165,8 +167,9 @@ void renderBox(int i, int j, int type, unsigned int VAO, Shader shader,std::vect
 
     shader.use();
     teksture[type].activateTexture(type);
+    teksture[8].activateTexture(8);
     shader.setInt("material.diffuse", type);
-    shader.setInt("material.specular", type);
+    shader.setInt("material.specular", 8);
 
 
     glBindVertexArray(VAO);
@@ -208,8 +211,6 @@ void renderLightCube(unsigned int VAO, Shader shader,ourCamera camera, glm::vec3
     shader.setMat4("model", model);
 
     glDrawArrays(GL_TRIANGLES, 0, 36);
-
-
 
 
 }

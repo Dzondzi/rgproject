@@ -29,6 +29,7 @@ bool firstMouse = true;
 
 std::pair<int,int> currPos;
 
+
 int main(){
     ourGlfwInit();
     ourCallbackInit();
@@ -165,7 +166,7 @@ void pm_key_callback(GLFWwindow *window, int key, int scancode, int action, int 
 
 
 
-    if(glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS ){
+    if(key == GLFW_KEY_UP  && action == GLFW_PRESS ){
         if(isAllowedMove(matrica,i-1,j)){
             matrica[i][j] = 7;
             matrica[i-1][j] = 5;
@@ -179,7 +180,7 @@ void pm_key_callback(GLFWwindow *window, int key, int scancode, int action, int 
             currPos = std::make_pair(i+1,j);
         }
     }
-    else if(glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS ){
+    else if(key == GLFW_KEY_LEFT  && action == GLFW_PRESS){
         if(isAllowedMove(matrica,i,j-1)){
             matrica[i][j] = 7;
             matrica[i][j-1] = 5;
@@ -190,7 +191,7 @@ void pm_key_callback(GLFWwindow *window, int key, int scancode, int action, int 
             matrica[9][20] = 5;
         }
     }
-    else if(glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS ){
+    else if(key == GLFW_KEY_RIGHT  && action == GLFW_PRESS){
         if(isAllowedMove(matrica,i,j+1)){
             matrica[i][j] = 7;
             matrica[i][j+1] = 5;
