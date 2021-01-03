@@ -8,6 +8,6 @@
 #include <rg/Texture2D.h>
 #include <vector>
 
-std::vector<Texture> initTextures();
+std::vector<Texture> loadTextures();
 
 #endif //PROJECT_BASE_LOADTEXTURES_H

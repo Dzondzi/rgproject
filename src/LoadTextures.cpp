@@ -4,7 +4,7 @@
 
 #include <rg/LoadTextures.h>
 
-std::vector<Texture> initTextures(){
+std::vector<Texture> loadTextures(){
     std::vector<Texture> teksture;
 
     Texture tex0("resources/textures/container.jpg");
