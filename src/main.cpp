@@ -95,6 +95,7 @@ int main(){
             currPos = findPosition(matrica,n, m, PACMAN);
             brPoena = 0;
             pacmanRotation = 0;
+            lastDirGhost = -1;
         }
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -252,6 +253,7 @@ void pm_key_callback(GLFWwindow *window, int key, int scancode, int action, int 
         currPos = findPosition(matrica, n, m, PACMAN);
         brPoena = 0;
         pacmanRotation = 0;
+        lastDirGhost = -1;
     }
 
     if (key == GLFW_KEY_F && action == GLFW_PRESS) {
@@ -318,10 +320,10 @@ void moveGhost(){
         }
         //desno
         if(dir == 0 && lastDirGhost != 2){
-            if(g_i == 9 && g_j == 0){
+            if(g_i == 9 && g_j == 20){
                 matrica[g_i][g_j] = lastBox;
-                lastBox = matrica[9][20];
-                matrica[9][20] = GHOST3;
+                lastBox = matrica[9][0];
+                matrica[9][0] = GHOST3;
                 lastDirGhost = 0;
                 ghostPos = std::make_pair(9,0);
                 return;
