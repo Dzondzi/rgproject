@@ -17,6 +17,8 @@
 #include <rg/ourCamera.h>
 
 unsigned int initBuffers();
-void renderBox(int i, int j, int type, unsigned int VAO, Shader shader, std::vector<Texture> teksture, ourCamera camera);
+void renderBox(int i, int j, int type, unsigned int VAO, Shader shader, std::vector<Texture> teksture, ourCamera camera,
+               glm::vec3 pointLightPositions[]);
+void renderLightCube(unsigned int VAO, Shader shader,ourCamera camera, glm::vec3 pointLightPosition);
 
 #endif //PROJECT_BASE_GAME_H

@@ -77,7 +77,8 @@ unsigned int initBuffers() {
 }
 
 
-void renderBox(int i, int j, int type, unsigned int VAO, Shader shader,std::vector<Texture> teksture, ourCamera camera){
+void renderBox(int i, int j, int type, unsigned int VAO, Shader shader,std::vector<Texture> teksture, ourCamera camera,
+               glm::vec3 pointLightPositions[]){
 
     if(type == 0)
         return;
@@ -89,15 +90,18 @@ void renderBox(int i, int j, int type, unsigned int VAO, Shader shader,std::vect
     shader.setVec3("viewPos", camera.Position);
     shader.setFloat("material.shininess", 32.0f);
 
-    glm::vec3 pointLightPositions[] = {
-            glm::vec3( 0.7f,  0.2f,  2.0f),
-            glm::vec3( 2.3f, -3.3f, -4.0f),
-            glm::vec3(-4.0f,  2.0f, -12.0f),
-            glm::vec3( 0.0f,  0.0f, -3.0f)
-    };
+//    glm::vec3 pointLightPositions[] = {
+//            glm::vec3( 0.7f,  0.2f,  2.0f),
+//            glm::vec3( 2.3f, -3.3f, -4.0f),
+//            glm::vec3(-4.0f,  2.0f, -12.0f),
+//            glm::vec3( 0.0f,  0.0f, -3.0f)
+//    };
 
 
     //IZMENITI SMESTITI U FUNKCIJE
+//    shader.setDirLight();
+//    shader.setPointLight();
+
     shader.setVec3("dirLight.direction", -0.2f, -1.0f, -0.3f);
     shader.setVec3("dirLight.ambient", 0.05f, 0.05f, 0.05f);
     shader.setVec3("dirLight.diffuse", 0.4f, 0.4f, 0.4f);
@@ -180,9 +184,32 @@ void renderBox(int i, int j, int type, unsigned int VAO, Shader shader,std::vect
     shader.setMat4("model", model);
 
     teksture[6].activateTexture(6);
-    teksture[10].activateTexture(10);
-    shader.setInt("material.diffuse", 1);
-    shader.setInt("material.specular", 10);
+    teksture[8].activateTexture(8);
+    shader.setInt("material.diffuse", 6);
+    shader.setInt("material.specular", 8);
 
     glDrawArrays(GL_TRIANGLES,0,36);
+}
+
+void renderLightCube(unsigned int VAO, Shader shader,ourCamera camera, glm::vec3 pointLightPosition){
+    shader.use();
+
+    glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+    shader.setMat4("projection", projection);
+
+    glm::mat4 view = camera.GetViewMatrix();
+    shader.setMat4("view", view);
+
+    glm::mat4 model = glm::mat4(1.f);
+    model = glm::mat4(1.f);
+    model = glm::translate(model, pointLightPosition);
+    model = glm::scale(model, glm::vec3(0.5f));
+
+    shader.setMat4("model", model);
+
+    glDrawArrays(GL_TRIANGLES, 0, 36);
+
+
+
+
 }

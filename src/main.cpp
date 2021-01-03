@@ -34,6 +34,8 @@ int main(){
     ourCallbackInit();
     glfwSetCursorPosCallback(window, mouse_callback);
     glfwSetScrollCallback(window, scroll_callback);
+    glfwSetKeyCallback(window, pm_key_callback);
+
 
     //ucitavanje matrice matrica
     initMatrix("resources/map/map01.txt");
@@ -43,19 +45,22 @@ int main(){
 
 
     Shader shader("resources/shaders/cubeShader.vs", "resources/shaders/cubeShader.fs");
+    Shader shader2("resources/shaders/lightCube.vs", "resources/shaders/lightCube.fs");
+
     unsigned int VAO = initBuffers();
-    shader.use();
-    glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
-    shader.setMat4("projection", projection);
 
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-  //  glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-    shader.setInt("texture1", 0);
+    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
     currPos = findPosition(matrica,n,m);
 
-    glfwSetKeyCallback(window, pm_key_callback);
 
+    glm::vec3 pointLightPositions[] = {
+            glm::vec3( 1.f,  0.f,  1.0f),
+            glm::vec3( 19.f,  -20.f, 1.0f),
+            glm::vec3( 19.f,  0.f, 1.0f),
+            glm::vec3( 1.f,  -20.0f, 1.0f)
+    };
 
     while (!glfwWindowShouldClose(window))
     {
@@ -77,8 +82,12 @@ int main(){
 
         for(int i = 0; i < n; i++){
             for(int j = 0; j < m; j++){
-                renderBox(i, j, matrica[j][i], VAO, shader, teksture, kamera);
+                renderBox(i, j, matrica[j][i], VAO, shader, teksture, kamera, pointLightPositions);
             }
+        }
+
+        for(int i = 0; i < 4; i++){
+            renderLightCube(VAO, shader2, kamera, pointLightPositions[i]);
         }
 
 
