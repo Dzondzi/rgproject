@@ -13,7 +13,7 @@ CMakeFiles/project_base.dir/src/Game.cpp.o
  ../include/stb_image.h
  ../libs/glad/include/KHR/khrplatform.h
  ../libs/glad/include/glad/glad.h
- /home/dzondzi/Desktop/grafa/rgproject/src/Game.cpp
+ /home/marko/Desktop/PROJEKAT/rgproject/src/Game.cpp
  configuration/root_directory.h
 CMakeFiles/project_base.dir/src/LoadTextures.cpp.o
  ../include/learnopengl/filesystem.h
@@ -22,7 +22,7 @@ CMakeFiles/project_base.dir/src/LoadTextures.cpp.o
  ../include/stb_image.h
  ../libs/glad/include/KHR/khrplatform.h
  ../libs/glad/include/glad/glad.h
- /home/dzondzi/Desktop/grafa/rgproject/src/LoadTextures.cpp
+ /home/marko/Desktop/PROJEKAT/rgproject/src/LoadTextures.cpp
  configuration/root_directory.h
 CMakeFiles/project_base.dir/src/MatrixChanges1.cpp.o
  ../include/learnopengl/filesystem.h
@@ -31,23 +31,23 @@ CMakeFiles/project_base.dir/src/MatrixChanges1.cpp.o
  ../include/stb_image.h
  ../libs/glad/include/KHR/khrplatform.h
  ../libs/glad/include/glad/glad.h
- /home/dzondzi/Desktop/grafa/rgproject/src/MatrixChanges1.cpp
+ /home/marko/Desktop/PROJEKAT/rgproject/src/MatrixChanges1.cpp
  configuration/root_directory.h
 CMakeFiles/project_base.dir/src/RenderCube.cpp.o
- /home/dzondzi/Desktop/grafa/rgproject/src/RenderCube.cpp
+ /home/marko/Desktop/PROJEKAT/rgproject/src/RenderCube.cpp
 CMakeFiles/project_base.dir/src/StartingCallbackInit.cpp.o
  ../include/rg/StartingCallbackInit.h
  ../include/rg/StartingGlfwInit.h
  ../include/stb_image.h
  ../libs/glad/include/KHR/khrplatform.h
  ../libs/glad/include/glad/glad.h
- /home/dzondzi/Desktop/grafa/rgproject/src/StartingCallbackInit.cpp
+ /home/marko/Desktop/PROJEKAT/rgproject/src/StartingCallbackInit.cpp
 CMakeFiles/project_base.dir/src/StartingGlfwInit.cpp.o
  ../include/rg/StartingGlfwInit.h
  ../include/stb_image.h
  ../libs/glad/include/KHR/khrplatform.h
  ../libs/glad/include/glad/glad.h
- /home/dzondzi/Desktop/grafa/rgproject/src/StartingGlfwInit.cpp
+ /home/marko/Desktop/PROJEKAT/rgproject/src/StartingGlfwInit.cpp
 CMakeFiles/project_base.dir/src/main.cpp.o
  ../include/learnopengl/filesystem.h
  ../include/rg/Game.h
@@ -66,5 +66,5 @@ CMakeFiles/project_base.dir/src/main.cpp.o
  ../libs/imgui/include/imgui.h
  ../libs/imgui/include/imgui_impl_glfw.h
  ../libs/imgui/include/imgui_impl_opengl3.h
- /home/dzondzi/Desktop/grafa/rgproject/src/main.cpp
+ /home/marko/Desktop/PROJEKAT/rgproject/src/main.cpp
  configuration/root_directory.h
