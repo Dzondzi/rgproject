@@ -149,10 +149,11 @@ unsigned int initBuffers() {
 
 
 void renderBox(int i, int j, int type, unsigned int VAO, ourShader shader,std::vector<ourTexture> teksture, ourCamera camera,
-               glm::vec3 pointLightPositions[], int pacmanRotation){
+               glm::vec3 pointLightPositions[],int numOfPointLights, int pacmanRotation){
 
     if(type == 0)
         return;
+
 
     glm::vec3 scalingVector = glm::vec3(1.f);
 
@@ -168,14 +169,16 @@ void renderBox(int i, int j, int type, unsigned int VAO, ourShader shader,std::v
     float linear = 0.09f;
     float quadratic = 0.032f;
 
+
     //setting point light TODO foreach petlja
-    for(int i = 0; i < 8; i++) {
+    for(int i = 0; i < numOfPointLights; i++) {
         setPointLight(shader, ambient, diffuse, specular, constant, linear, quadratic, pointLightPositions[i], i);
     }
 
 
+
     //setting direction light
-    shader.setVec3("dirLight.direction", 0.0f, 0.5f, -1.f);
+    shader.setVec3("dirLight.direction", 0.0f, 0.0f, -1.f);
     shader.setVec3("dirLight.ambient", 0.05f, 0.05f, 0.05f);
     shader.setVec3("dirLight.diffuse", 0.5f, 0.5f, 0.5f);
     shader.setVec3("dirLight.specular", 0.5f, 0.5f, 0.5f);

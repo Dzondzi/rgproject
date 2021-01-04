@@ -20,7 +20,7 @@
 unsigned int initBuffers();
 unsigned int initEBOBuffers();
 void renderBox(int i, int j, int type, unsigned int VAO, ourShader shader, std::vector<ourTexture> teksture, ourCamera camera,
-               glm::vec3 pointLightPositions[], int pacmanRotaion);
+               glm::vec3 pointLightPositions[],int numOfPointLights, int pacmanRotaion);
 void renderLightCube(unsigned int VAO, ourShader shader,ourCamera camera, glm::vec3 pointLightPosition);
 void renderModel(Model model, Shader shader, ourCamera camera, glm::vec3 pointLightPosition);
 #endif //PROJECT_BASE_GAME_H

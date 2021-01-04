@@ -14,7 +14,7 @@ std::vector<ourTexture> loadTextures(){
     ourTexture tex4("resources/textures/blueghostPM.png");
     ourTexture tex5("resources/textures/pm.png");
     ourTexture tex6("resources/textures/noSpecular.jpg");
-    ourTexture tex7("resources/textures/white.png");
+    ourTexture tex7("resources/textures/stripes3.jpg");
     ourTexture tex8("resources/textures/noSpecular.jpg");
     ourTexture tex9("resources/textures/container2.png");
     ourTexture tex10("resources/textures/container2_specular.png");

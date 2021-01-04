@@ -83,6 +83,11 @@ int main(){
             glm::vec3(16.f,-10.f,1.f)
 
     };
+    int numOfPointLights = 0;
+
+    for(auto &i : pointLightPositions){
+        numOfPointLights++;
+    }
 
     pacmanRotation = 0;
 
@@ -113,7 +118,8 @@ int main(){
 
         for(int i = 0; i < n; i++){
             for(int j = 0; j < m; j++){
-                renderBox(i, j, matrica[j][i], VAO, shader, teksture, kamera, pointLightPositions, pacmanRotation);
+                renderBox(i, j, matrica[j][i], VAO, shader, teksture, kamera, pointLightPositions, numOfPointLights
+                          ,pacmanRotation);
             }
         }
 
