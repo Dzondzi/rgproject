@@ -2,15 +2,18 @@
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
 
+#include <learnopengl/shader.h>
+#include <rg/model.h>
 
 #include <rg/StartingGlfwInit.h>
 #include <rg/StartingCallbackInit.h>
-#include <rg/Shader.h>
-#include <rg/Texture2D.h>
+#include <rg/ourShader.h>
+#include <rg/ourTexture.h>
 #include <rg/MatrixChanges1.h>
 #include <rg/Game.h>
 #include <rg/LoadTextures.h>
 #include <rg/ourCamera.h>
+#include <learnopengl/shader.h>
 #include <time.h>
 
 #define BROJ_POLJA 150
@@ -54,13 +57,14 @@ int main(){
     initMatrix("resources/map/map01.txt");
 
 
-    std::vector<Texture> teksture = loadTextures();
+    std::vector<ourTexture> teksture = loadTextures();
 
 
-    Shader shader("resources/shaders/cubeShader.vs", "resources/shaders/cubeShader.fs");
-    Shader shader2("resources/shaders/lightCube.vs", "resources/shaders/lightCube.fs");
+    ourShader shader("resources/shaders/cubeShader.vs", "resources/shaders/cubeShader.fs");
+    ourShader shader2("resources/shaders/lightCube.vs", "resources/shaders/lightCube.fs");
 
     unsigned int VAO = initBuffers();
+    unsigned int VAO2 = initEBOBuffers();
 
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -72,11 +76,18 @@ int main(){
             glm::vec3( 1.f,  0.f,  1.0f),
             glm::vec3( 19.f,  -20.f, 1.0f),
             glm::vec3( 19.f,  0.f, 1.0f),
-            glm::vec3( 1.f,  -20.0f, 1.0f)
+            glm::vec3( 1.f,  -20.0f, 1.0f),
+            glm::vec3(4.f,-8.f,1.f),
+            glm::vec3(4.f,-10.f,1.f),
+            glm::vec3(16.f,-8.f,1.f),
+            glm::vec3(16.f,-10.f,1.f)
 
     };
 
     pacmanRotation = 0;
+
+    Shader modelShader("modelShader.vs", "modelShader.fs");
+    Model nasModel("resources/objects/planet/planet.obj");
 
     while (!glfwWindowShouldClose(window))
     {
@@ -107,7 +118,11 @@ int main(){
         }
 
         for(auto & pointLightPosition : pointLightPositions){
-            renderLightCube(VAO, shader2, kamera, pointLightPosition);
+            renderLightCube(VAO2, shader2, kamera, pointLightPosition);
+        }
+
+        for(auto & pointLightPosition : pointLightPositions){
+            renderModel(nasModel, modelShader, kamera, pointLightPosition);
         }
 
 
@@ -181,6 +196,7 @@ void pm_key_callback(GLFWwindow *window, int key, int scancode, int action, int 
     int j = currPos.second;
 
     bool moved = false;
+    bool ind = false;
 
     if(key == GLFW_KEY_UP  && action == GLFW_PRESS ){
         if(isAllowedMove(matrica,i-1,j)){
@@ -210,18 +226,19 @@ void pm_key_callback(GLFWwindow *window, int key, int scancode, int action, int 
             matrica[9][20] = PACMAN;
             matrica[i][j] = 7;
             pacmanRotation = 2;
-
-            return;
+            ind = true;
         }
-        if(isAllowedMove(matrica,i,j-1)){
+        if(!ind && isAllowedMove(matrica,i,j-1)){
             if(matrica[i][j-1] == 2)
                 brPoena++;
             matrica[i][j] = 7;
             matrica[i][j-1] = PACMAN;
             currPos = std::make_pair(i,j-1);
             pacmanRotation = 2;
-            moved = true;
+            ind = true;
         }
+        if(ind)
+            moved = true;
 
     }
     else if(key == GLFW_KEY_RIGHT  && action == GLFW_PRESS){
@@ -230,18 +247,20 @@ void pm_key_callback(GLFWwindow *window, int key, int scancode, int action, int 
             matrica[9][0] = 5;
             matrica[i][j] = 7;
             pacmanRotation = 0;
-            return;
+            ind = true;
+
         }
-        if(isAllowedMove(matrica,i,j+1)){
+        if(ind == false && isAllowedMove(matrica,i,j+1)){
             if(matrica[i][j+1] == 2)
                 brPoena++;
             matrica[i][j] = 7;
             matrica[i][j+1] = 5;
             currPos = std::make_pair(i,j+1);
             pacmanRotation = 0;
-            moved = true;
-
+            ind = true;
         }
+        if(ind)
+            moved = true;
     }
 
     if(moved){

@@ -4,20 +4,20 @@
 
 #include <rg/LoadTextures.h>
 
-std::vector<Texture> loadTextures(){
-    std::vector<Texture> teksture;
+std::vector<ourTexture> loadTextures(){
+    std::vector<ourTexture> teksture;
 
-    Texture tex0("resources/textures/container.jpg");
-    Texture tex1("resources/textures/bricks2.jpg");
-    Texture tex2("resources/textures/awesomeface.png");
-    Texture tex3("resources/textures/redpm.png");
-    Texture tex4("resources/textures/blueghostPM.png");
-    Texture tex5("resources/textures/pm.png");
-    Texture tex6("resources/textures/mincrgrass.jpg");
-    Texture tex7("resources/textures/white.png");
-    Texture tex8("resources/textures/noSpecular.jpg");
-    Texture tex9("resources/textures/container2.png");
-    Texture tex10("resources/textures/container2_specular.png");
+    ourTexture tex0("resources/textures/container.jpg");
+    ourTexture tex1("resources/textures/pacwall.jpg");
+    ourTexture tex2("resources/textures/awesomeface.png");
+    ourTexture tex3("resources/textures/redpm.png");
+    ourTexture tex4("resources/textures/blueghostPM.png");
+    ourTexture tex5("resources/textures/pm.png");
+    ourTexture tex6("resources/textures/noSpecular.jpg");
+    ourTexture tex7("resources/textures/white.png");
+    ourTexture tex8("resources/textures/noSpecular.jpg");
+    ourTexture tex9("resources/textures/container2.png");
+    ourTexture tex10("resources/textures/container2_specular.png");
 
 
     teksture.push_back(tex0);
