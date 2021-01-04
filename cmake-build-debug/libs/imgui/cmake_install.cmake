@@ -1,4 +1,4 @@
-# Install script for directory: /home/dzondzi/Desktop/rgproject/libs/imgui
+# Install script for directory: /home/marko/Desktop/projekat/rgproject/libs/imgui
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

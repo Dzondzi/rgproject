@@ -42,7 +42,7 @@ include_directories(${CMAKE_BINARY_DIR}/configuration)
 
 include_directories(include/)
 add_executable(${PROJECT_NAME}
-        ${SOURCES} src/LoadTextures.cpp include/rg/LoadTextures.h include/rg/ourCamera.h)
+        ${SOURCES} src/LoadTextures.cpp include/rg/LoadTextures.h include/rg/ourCamera.h src/InitBuffers.cpp include/rg/InitBuffers.h)
 
 target_link_libraries(${PROJECT_NAME} ${LIBS})
 

@@ -68,10 +68,10 @@ RM = /snap/clion/138/bin/cmake/linux/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/dzondzi/Desktop/rgproject
+CMAKE_SOURCE_DIR = /home/marko/Desktop/projekat/rgproject
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/dzondzi/Desktop/rgproject/cmake-build-debug
+CMAKE_BINARY_DIR = /home/marko/Desktop/projekat/rgproject/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -100,9 +100,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/dzondzi/Desktop/rgproject/cmake-build-debug/CMakeFiles /home/dzondzi/Desktop/rgproject/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/marko/Desktop/projekat/rgproject/cmake-build-debug/CMakeFiles /home/marko/Desktop/projekat/rgproject/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/dzondzi/Desktop/rgproject/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/marko/Desktop/projekat/rgproject/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -235,6 +235,33 @@ src/Game.s: src/Game.cpp.s
 src/Game.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/project_base.dir/build.make CMakeFiles/project_base.dir/src/Game.cpp.s
 .PHONY : src/Game.cpp.s
+
+src/InitBuffers.o: src/InitBuffers.cpp.o
+
+.PHONY : src/InitBuffers.o
+
+# target to build an object file
+src/InitBuffers.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/project_base.dir/build.make CMakeFiles/project_base.dir/src/InitBuffers.cpp.o
+.PHONY : src/InitBuffers.cpp.o
+
+src/InitBuffers.i: src/InitBuffers.cpp.i
+
+.PHONY : src/InitBuffers.i
+
+# target to preprocess a source file
+src/InitBuffers.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/project_base.dir/build.make CMakeFiles/project_base.dir/src/InitBuffers.cpp.i
+.PHONY : src/InitBuffers.cpp.i
+
+src/InitBuffers.s: src/InitBuffers.cpp.s
+
+.PHONY : src/InitBuffers.s
+
+# target to generate assembly for a file
+src/InitBuffers.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/project_base.dir/build.make CMakeFiles/project_base.dir/src/InitBuffers.cpp.s
+.PHONY : src/InitBuffers.cpp.s
 
 src/LoadTextures.o: src/LoadTextures.cpp.o
 
@@ -389,6 +416,9 @@ help:
 	@echo "... src/Game.o"
 	@echo "... src/Game.i"
 	@echo "... src/Game.s"
+	@echo "... src/InitBuffers.o"
+	@echo "... src/InitBuffers.i"
+	@echo "... src/InitBuffers.s"
 	@echo "... src/LoadTextures.o"
 	@echo "... src/LoadTextures.i"
 	@echo "... src/LoadTextures.s"

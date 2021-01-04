@@ -16,8 +16,13 @@ CMakeFiles/project_base.dir/src/Game.cpp.o
  ../include/stb_image.h
  ../libs/glad/include/KHR/khrplatform.h
  ../libs/glad/include/glad/glad.h
- /home/dzondzi/Desktop/rgproject/src/Game.cpp
+ /home/marko/Desktop/projekat/rgproject/src/Game.cpp
  configuration/root_directory.h
+CMakeFiles/project_base.dir/src/InitBuffers.cpp.o
+ ../include/rg/InitBuffers.h
+ ../libs/glad/include/KHR/khrplatform.h
+ ../libs/glad/include/glad/glad.h
+ /home/marko/Desktop/projekat/rgproject/src/InitBuffers.cpp
 CMakeFiles/project_base.dir/src/LoadTextures.cpp.o
  ../include/learnopengl/filesystem.h
  ../include/rg/LoadTextures.h
@@ -25,7 +30,7 @@ CMakeFiles/project_base.dir/src/LoadTextures.cpp.o
  ../include/stb_image.h
  ../libs/glad/include/KHR/khrplatform.h
  ../libs/glad/include/glad/glad.h
- /home/dzondzi/Desktop/rgproject/src/LoadTextures.cpp
+ /home/marko/Desktop/projekat/rgproject/src/LoadTextures.cpp
  configuration/root_directory.h
 CMakeFiles/project_base.dir/src/MatrixChanges1.cpp.o
  ../include/learnopengl/filesystem.h
@@ -34,7 +39,7 @@ CMakeFiles/project_base.dir/src/MatrixChanges1.cpp.o
  ../include/stb_image.h
  ../libs/glad/include/KHR/khrplatform.h
  ../libs/glad/include/glad/glad.h
- /home/dzondzi/Desktop/rgproject/src/MatrixChanges1.cpp
+ /home/marko/Desktop/projekat/rgproject/src/MatrixChanges1.cpp
  configuration/root_directory.h
 CMakeFiles/project_base.dir/src/StartingCallbackInit.cpp.o
  ../include/rg/StartingCallbackInit.h
@@ -42,18 +47,19 @@ CMakeFiles/project_base.dir/src/StartingCallbackInit.cpp.o
  ../include/stb_image.h
  ../libs/glad/include/KHR/khrplatform.h
  ../libs/glad/include/glad/glad.h
- /home/dzondzi/Desktop/rgproject/src/StartingCallbackInit.cpp
+ /home/marko/Desktop/projekat/rgproject/src/StartingCallbackInit.cpp
 CMakeFiles/project_base.dir/src/StartingGlfwInit.cpp.o
  ../include/rg/StartingGlfwInit.h
  ../include/stb_image.h
  ../libs/glad/include/KHR/khrplatform.h
  ../libs/glad/include/glad/glad.h
- /home/dzondzi/Desktop/rgproject/src/StartingGlfwInit.cpp
+ /home/marko/Desktop/projekat/rgproject/src/StartingGlfwInit.cpp
 CMakeFiles/project_base.dir/src/main.cpp.o
  ../include/learnopengl/filesystem.h
  ../include/learnopengl/mesh.h
  ../include/learnopengl/shader.h
  ../include/rg/Game.h
+ ../include/rg/InitBuffers.h
  ../include/rg/LoadMatrix.h
  ../include/rg/LoadTextures.h
  ../include/rg/MatrixChanges1.h
@@ -70,5 +76,5 @@ CMakeFiles/project_base.dir/src/main.cpp.o
  ../libs/imgui/include/imgui.h
  ../libs/imgui/include/imgui_impl_glfw.h
  ../libs/imgui/include/imgui_impl_opengl3.h
- /home/dzondzi/Desktop/rgproject/src/main.cpp
+ /home/marko/Desktop/projekat/rgproject/src/main.cpp
  configuration/root_directory.h

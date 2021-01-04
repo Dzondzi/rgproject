@@ -11,6 +11,7 @@
 #include <rg/ourTexture.h>
 #include <rg/MatrixChanges1.h>
 #include <rg/Game.h>
+#include <rg/InitBuffers.h>
 #include <rg/LoadTextures.h>
 #include <rg/ourCamera.h>
 #include <learnopengl/shader.h>

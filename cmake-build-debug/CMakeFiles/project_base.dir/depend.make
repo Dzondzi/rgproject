@@ -18,6 +18,11 @@ CMakeFiles/project_base.dir/src/Game.cpp.o: ../libs/glad/include/glad/glad.h
 CMakeFiles/project_base.dir/src/Game.cpp.o: ../src/Game.cpp
 CMakeFiles/project_base.dir/src/Game.cpp.o: configuration/root_directory.h
 
+CMakeFiles/project_base.dir/src/InitBuffers.cpp.o: ../include/rg/InitBuffers.h
+CMakeFiles/project_base.dir/src/InitBuffers.cpp.o: ../libs/glad/include/KHR/khrplatform.h
+CMakeFiles/project_base.dir/src/InitBuffers.cpp.o: ../libs/glad/include/glad/glad.h
+CMakeFiles/project_base.dir/src/InitBuffers.cpp.o: ../src/InitBuffers.cpp
+
 CMakeFiles/project_base.dir/src/LoadTextures.cpp.o: ../include/learnopengl/filesystem.h
 CMakeFiles/project_base.dir/src/LoadTextures.cpp.o: ../include/rg/LoadTextures.h
 CMakeFiles/project_base.dir/src/LoadTextures.cpp.o: ../include/rg/ourTexture.h
@@ -53,6 +58,7 @@ CMakeFiles/project_base.dir/src/main.cpp.o: ../include/learnopengl/filesystem.h
 CMakeFiles/project_base.dir/src/main.cpp.o: ../include/learnopengl/mesh.h
 CMakeFiles/project_base.dir/src/main.cpp.o: ../include/learnopengl/shader.h
 CMakeFiles/project_base.dir/src/main.cpp.o: ../include/rg/Game.h
+CMakeFiles/project_base.dir/src/main.cpp.o: ../include/rg/InitBuffers.h
 CMakeFiles/project_base.dir/src/main.cpp.o: ../include/rg/LoadMatrix.h
 CMakeFiles/project_base.dir/src/main.cpp.o: ../include/rg/LoadTextures.h
 CMakeFiles/project_base.dir/src/main.cpp.o: ../include/rg/MatrixChanges1.h
