@@ -36,8 +36,6 @@ CMakeFiles/project_base.dir/src/MatrixChanges1.cpp.o
  ../libs/glad/include/glad/glad.h
  /home/dzondzi/Desktop/rgproject/src/MatrixChanges1.cpp
  configuration/root_directory.h
-CMakeFiles/project_base.dir/src/RenderCube.cpp.o
- /home/dzondzi/Desktop/rgproject/src/RenderCube.cpp
 CMakeFiles/project_base.dir/src/StartingCallbackInit.cpp.o
  ../include/rg/StartingCallbackInit.h
  ../include/rg/StartingGlfwInit.h

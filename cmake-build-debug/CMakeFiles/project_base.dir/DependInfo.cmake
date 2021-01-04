@@ -7,7 +7,6 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/dzondzi/Desktop/rgproject/src/Game.cpp" "/home/dzondzi/Desktop/rgproject/cmake-build-debug/CMakeFiles/project_base.dir/src/Game.cpp.o"
   "/home/dzondzi/Desktop/rgproject/src/LoadTextures.cpp" "/home/dzondzi/Desktop/rgproject/cmake-build-debug/CMakeFiles/project_base.dir/src/LoadTextures.cpp.o"
   "/home/dzondzi/Desktop/rgproject/src/MatrixChanges1.cpp" "/home/dzondzi/Desktop/rgproject/cmake-build-debug/CMakeFiles/project_base.dir/src/MatrixChanges1.cpp.o"
-  "/home/dzondzi/Desktop/rgproject/src/RenderCube.cpp" "/home/dzondzi/Desktop/rgproject/cmake-build-debug/CMakeFiles/project_base.dir/src/RenderCube.cpp.o"
   "/home/dzondzi/Desktop/rgproject/src/StartingCallbackInit.cpp" "/home/dzondzi/Desktop/rgproject/cmake-build-debug/CMakeFiles/project_base.dir/src/StartingCallbackInit.cpp.o"
   "/home/dzondzi/Desktop/rgproject/src/StartingGlfwInit.cpp" "/home/dzondzi/Desktop/rgproject/cmake-build-debug/CMakeFiles/project_base.dir/src/StartingGlfwInit.cpp.o"
   "/home/dzondzi/Desktop/rgproject/src/main.cpp" "/home/dzondzi/Desktop/rgproject/cmake-build-debug/CMakeFiles/project_base.dir/src/main.cpp.o"

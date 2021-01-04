@@ -16,11 +16,20 @@
 #include <learnopengl/shader.h>
 #include <time.h>
 
+
 #define BROJ_POLJA 150
-#define PACMAN 5
+#define WALL_BOX 1
+#define FOOD_BOX 2
 #define GHOST3 3
+#define GHOST4 4
+#define PACMAN 5
+#define GHOST6 6
+#define NO_BOX 7
+#define GHOST8 8
 
 void moveGhost();
+void newGame();
+void isEndGame();
 std::pair<int,int> findPosition(std::vector<std::vector<unsigned int>> matrica, int n, int m, unsigned int findThis);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
@@ -39,6 +48,7 @@ int brPoena = 0;
 
 std::pair<int,int> currPos;
 std::pair<int,int> ghostPos;
+bool endGame = false;
 int pacmanRotation;
 int lastDirGhost = -1;
 int lastBox = 7;
@@ -66,7 +76,7 @@ int main(){
     unsigned int VAO = initBuffers();
     unsigned int VAO2 = initEBOBuffers();
 
-    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+    glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
     currPos = findPosition(matrica,n,m, PACMAN);
@@ -106,12 +116,8 @@ int main(){
         kamera.keyboardInput(window, deltaTime);
 
         //ako skupimo sve poene vracamo se na pocetak
-        if(brPoena == BROJ_POLJA){
-            restartMatrix();
-            currPos = findPosition(matrica,n, m, PACMAN);
-            brPoena = 0;
-            pacmanRotation = 0;
-            lastDirGhost = -1;
+        if(endGame){
+            newGame();
         }
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -191,8 +197,9 @@ std::pair<int,int> findPosition(std::vector<std::vector<unsigned int>> matrica, 
 }
 
 bool isAllowedMove(std::vector<std::vector<unsigned int>> matrica, int i, int j){
-    if(matrica[i][j] == 2 || matrica[i][j] == 0 || matrica[i][j] == 7)
+    if(matrica[i][j] == FOOD_BOX || matrica[i][j] == NO_BOX || matrica[i][j] == GHOST3 || matrica[i][j] == PACMAN)
         return true;
+
     return false;
 }
 
@@ -214,6 +221,7 @@ void pm_key_callback(GLFWwindow *window, int key, int scancode, int action, int 
             pacmanRotation = 1;
             moved = true;
         }
+
     }
     else if(key == GLFW_KEY_DOWN  && action == GLFW_PRESS ){
         if(isAllowedMove(matrica,i+1,j)){
@@ -270,15 +278,21 @@ void pm_key_callback(GLFWwindow *window, int key, int scancode, int action, int 
     }
 
     if(moved){
+        isEndGame();
+        if(endGame){
+            newGame();
+            return;
+        }
         moveGhost();
+        isEndGame();
+        if(endGame){
+            newGame();
+            return;
+        }
     }
 
     if(key == GLFW_KEY_N && action == GLFW_PRESS){
-        restartMatrix();
-        currPos = findPosition(matrica, n, m, PACMAN);
-        brPoena = 0;
-        pacmanRotation = 0;
-        lastDirGhost = -1;
+        newGame();
     }
 
     if (key == GLFW_KEY_F && action == GLFW_PRESS) {
@@ -287,6 +301,24 @@ void pm_key_callback(GLFWwindow *window, int key, int scancode, int action, int 
     if (key == GLFW_KEY_R && action == GLFW_PRESS) {
         glfwRestoreWindow(window);
     }
+
+}
+
+void isEndGame(){
+    if(currPos.first == ghostPos.first && currPos.second == ghostPos.second)
+        endGame = true;
+    if(brPoena == BROJ_POLJA)
+        endGame = true;
+
+}
+void newGame(){
+    restartMatrix();
+    currPos = findPosition(matrica, n, m, PACMAN);
+    brPoena = 0;
+    pacmanRotation = 0;
+    lastDirGhost = -1;
+    lastBox = NO_BOX;
+    endGame = false;
 }
 
 void moveGhost(){

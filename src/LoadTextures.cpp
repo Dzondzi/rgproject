@@ -10,14 +10,14 @@ std::vector<ourTexture> loadTextures(){
     ourTexture tex0("resources/textures/container.jpg");
     ourTexture tex1("resources/textures/pacwall.jpg");
     ourTexture tex2("resources/textures/awesomeface.png");
-    ourTexture tex3("resources/textures/redpm.png");
-    ourTexture tex4("resources/textures/blueghostPM.png");
+    ourTexture tex3("resources/textures/ghost1.png");
+    ourTexture tex4("resources/textures/ghost2.png");
     ourTexture tex5("resources/textures/pm.png");
-    ourTexture tex6("resources/textures/noSpecular.jpg");
-    ourTexture tex7("resources/textures/stripes3.jpg");
-    ourTexture tex8("resources/textures/noSpecular.jpg");
-    ourTexture tex9("resources/textures/container2.png");
-    ourTexture tex10("resources/textures/container2_specular.png");
+    ourTexture tex6("resources/textures/ghost3.png");
+    ourTexture tex7("resources/textures/container.jpg");
+    ourTexture tex8("resources/textures/ghost4.png");
+    ourTexture tex9("resources/textures/noSpecular.jpg");
+    ourTexture tex10("resources/textures/stripes3.jpg");
 
 
     teksture.push_back(tex0);

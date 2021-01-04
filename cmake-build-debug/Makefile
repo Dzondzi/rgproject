@@ -290,33 +290,6 @@ src/MatrixChanges1.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/project_base.dir/build.make CMakeFiles/project_base.dir/src/MatrixChanges1.cpp.s
 .PHONY : src/MatrixChanges1.cpp.s
 
-src/RenderCube.o: src/RenderCube.cpp.o
-
-.PHONY : src/RenderCube.o
-
-# target to build an object file
-src/RenderCube.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/project_base.dir/build.make CMakeFiles/project_base.dir/src/RenderCube.cpp.o
-.PHONY : src/RenderCube.cpp.o
-
-src/RenderCube.i: src/RenderCube.cpp.i
-
-.PHONY : src/RenderCube.i
-
-# target to preprocess a source file
-src/RenderCube.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/project_base.dir/build.make CMakeFiles/project_base.dir/src/RenderCube.cpp.i
-.PHONY : src/RenderCube.cpp.i
-
-src/RenderCube.s: src/RenderCube.cpp.s
-
-.PHONY : src/RenderCube.s
-
-# target to generate assembly for a file
-src/RenderCube.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/project_base.dir/build.make CMakeFiles/project_base.dir/src/RenderCube.cpp.s
-.PHONY : src/RenderCube.cpp.s
-
 src/StartingCallbackInit.o: src/StartingCallbackInit.cpp.o
 
 .PHONY : src/StartingCallbackInit.o
@@ -422,9 +395,6 @@ help:
 	@echo "... src/MatrixChanges1.o"
 	@echo "... src/MatrixChanges1.i"
 	@echo "... src/MatrixChanges1.s"
-	@echo "... src/RenderCube.o"
-	@echo "... src/RenderCube.i"
-	@echo "... src/RenderCube.s"
 	@echo "... src/StartingCallbackInit.o"
 	@echo "... src/StartingCallbackInit.i"
 	@echo "... src/StartingCallbackInit.s"

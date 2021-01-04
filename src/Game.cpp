@@ -6,9 +6,16 @@
 #include <rg/StartingGlfwInit.h>
 #include <string>
 
-#define NO_BOX 7
+#define WALL_BOX 1
 #define FOOD_BOX 2
+#define GHOST3 3
+#define GHOST4 4
 #define PACMAN 5
+#define GHOST6 6
+#define NO_BOX 7
+#define GHOST8 8
+#define FLOOR_BOX 9
+#define FLOOR_SPECULAR 10
 
 void setPointLight(ourShader shader, glm::vec3 ambient,glm::vec3 diffuse,glm::vec3 specular,
                    float constant,float linear,float quadratic,glm::vec3 pointLightPosition,int num);
@@ -199,7 +206,6 @@ void renderBox(int i, int j, int type, unsigned int VAO, ourShader shader,std::v
     }
 
 
-
     glm::mat4 model = glm::mat4(1.0f); // make sure to initialize matrix to identity matrix first
     model = glm::translate(model, glm::vec3((float)(i),(float)(-j), 0.0));
     if(type == PACMAN){
@@ -211,10 +217,10 @@ void renderBox(int i, int j, int type, unsigned int VAO, ourShader shader,std::v
 
     shader.use();
     teksture[type].activateTexture(type);
-    teksture[8].activateTexture(8);
+    teksture[FLOOR_BOX].activateTexture(FLOOR_BOX);
 
     shader.setInt("material.diffuse", type);
-    shader.setInt("material.specular", 8);
+    shader.setInt("material.specular", FLOOR_BOX);
 
 
     glBindVertexArray(VAO);
@@ -231,10 +237,10 @@ void renderBox(int i, int j, int type, unsigned int VAO, ourShader shader,std::v
     model = glm::translate(model, glm::vec3((float)(i),(float)(-j), -1.0));
     shader.setMat4("model", model);
 
-    teksture[6].activateTexture(6);
-    teksture[7].activateTexture(7);
-    shader.setInt("material.diffuse", 6);
-    shader.setInt("material.specular", 7);
+    teksture[FLOOR_BOX].activateTexture(FLOOR_BOX);
+    teksture[FLOOR_SPECULAR].activateTexture(FLOOR_SPECULAR);
+    shader.setInt("material.diffuse", FLOOR_BOX);
+    shader.setInt("material.specular", FLOOR_SPECULAR);
 
     glDrawArrays(GL_TRIANGLES,0,36);
 }
@@ -270,7 +276,7 @@ void renderModel(Model nasModel, Shader modelShader, ourCamera kamera, glm::vec3
 
 
         modelShader.setVec3("viewPos", kamera.Position);
-        modelShader.setVec3("dirLight.direction", 0.0f, 0.5f, -1.f);
+        modelShader.setVec3("dirLight.direction", 0.0f, 0.0f, -1.f);
         modelShader.setVec3("dirLight.ambient", 0.25f, 0.25f, 0.25f);
         modelShader.setVec3("dirLight.diffuse", 1.4f, 1.4f, 1.4f);
         modelShader.setVec3("dirLight.specular", 0.5f, 0.5f, 0.5f);

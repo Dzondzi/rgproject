@@ -239,9 +239,6 @@
 		<Unit filename="/home/dzondzi/Desktop/rgproject/include/rg/LoadTextures.h">
 			<Option target="project_base"/>
 		</Unit>
-		<Unit filename="/home/dzondzi/Desktop/rgproject/include/rg/RenderCube.h">
-			<Option target="project_base"/>
-		</Unit>
 		<Unit filename="/home/dzondzi/Desktop/rgproject/include/rg/ourCamera.h">
 			<Option target="project_base"/>
 		</Unit>
@@ -306,9 +303,6 @@
 			<Option target="project_base"/>
 		</Unit>
 		<Unit filename="/home/dzondzi/Desktop/rgproject/src/MatrixChanges1.cpp">
-			<Option target="project_base"/>
-		</Unit>
-		<Unit filename="/home/dzondzi/Desktop/rgproject/src/RenderCube.cpp">
 			<Option target="project_base"/>
 		</Unit>
 		<Unit filename="/home/dzondzi/Desktop/rgproject/src/StartingCallbackInit.cpp">
