@@ -317,6 +317,7 @@ void renderLightCube(unsigned int VAO, ourShader shader,ourCamera camera, glm::v
 }
 
 void renderModel(Model nasModel, Shader modelShader, ourCamera kamera, glm::vec3 position) {
+
         modelShader.use();
         glm::mat4 projection = glm::perspective(glm::radians(kamera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
         glm::mat4 view = kamera.GetViewMatrix();

@@ -29,12 +29,12 @@
 #define GHOST8 8
 
 void moveAllGhosts();
-void moveGhost(int i);
+void moveGhost(int num);
 void newGame();
 void isEndGame();
 void restartPositions();
 int numMovingDir(std::pair<int,int> pos);
-std::pair<int,int> findPosition(std::vector<std::vector<unsigned int>> matrica, int n, int m, unsigned int findThis);
+
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void pm_key_callback(GLFWwindow *window, int key, int scancode, int action, int mods);
@@ -77,8 +77,6 @@ int main(){
     std::vector<ourTexture> ghostTextures = loadGhostTextures();
 
 
-
-    ourShader shader("resources/shaders/cubeShader.vs", "resources/shaders/cubeShader.fs");
     ourShader mapShader("resources/shaders/cubeShader.vs", "resources/shaders/cubeShader.fs");
     ourShader ghostShader("resources/shaders/cubeShader.vs", "resources/shaders/cubeShader.fs");
     ourShader pacmanShader("resources/shaders/cubeShader.vs", "resources/shaders/cubeShader.fs");
@@ -106,7 +104,6 @@ int main(){
 
     };
     int numOfPointLights = 0;
-
     for(auto &i : pointLightPositions){
         numOfPointLights++;
     }
@@ -137,13 +134,9 @@ int main(){
 
         for(int i = 0; i < n; i++){
             for(int j = 0; j < m; j++){
-//                renderBox(i, j, matrica[j][i], VAO, shader, teksture, kamera, pointLightPositions, numOfPointLights
-//                          ,pacmanRotation);
                 renderMap(i, j, matrica[j][i], VAO, mapShader, teksture, kamera, pointLightPositions, numOfPointLights);
-
             }
         }
-
 
         renderPacman(currPos,VAO, pacmanShader, pacmanTexture, kamera, pointLightPositions, numOfPointLights, pacmanRotation);
 
@@ -210,12 +203,9 @@ void processInput(GLFWwindow *window)
 
 
 bool isAllowedMove(std::vector<std::vector<unsigned int>> matrica, int i, int j){
-//    if(matrica[i][j] == FOOD_BOX || matrica[i][j] == NO_BOX || matrica[i][j] == GHOST3 || matrica[i][j] == PACMAN)
-//        return true;
 
     if(matrica[i][j] == WALL_BOX)
         return false;
-
     return true;
 }
 
