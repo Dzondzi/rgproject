@@ -250,21 +250,13 @@ imgui.h
 TargetConditionals.h
 ../libs/imgui/include/TargetConditionals.h
 
-/home/marko/Desktop/projekat/rgproject/src/Game.cpp
-rg/Game.h
--
-rg/StartingGlfwInit.h
--
-string
--
-
-/home/marko/Desktop/projekat/rgproject/src/main.cpp
+/home/dzondzi/Desktop/grafa/rgproject/src/main.cpp
 imgui.h
-/home/marko/Desktop/projekat/rgproject/src/imgui.h
+/home/dzondzi/Desktop/grafa/rgproject/src/imgui.h
 imgui_impl_glfw.h
-/home/marko/Desktop/projekat/rgproject/src/imgui_impl_glfw.h
+/home/dzondzi/Desktop/grafa/rgproject/src/imgui_impl_glfw.h
 imgui_impl_opengl3.h
-/home/marko/Desktop/projekat/rgproject/src/imgui_impl_opengl3.h
+/home/dzondzi/Desktop/grafa/rgproject/src/imgui_impl_opengl3.h
 learnopengl/shader.h
 -
 rg/model.h

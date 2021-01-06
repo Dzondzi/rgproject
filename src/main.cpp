@@ -28,9 +28,12 @@
 #define NO_BOX 7
 #define GHOST8 8
 
-void moveGhost();
+void moveAllGhosts();
+void moveGhost(int i);
 void newGame();
 void isEndGame();
+void restartPositions();
+int numMovingDir(std::pair<int,int> pos);
 std::pair<int,int> findPosition(std::vector<std::vector<unsigned int>> matrica, int n, int m, unsigned int findThis);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
@@ -41,17 +44,20 @@ bool isAllowedMove(std::vector<std::vector<unsigned int>> matrica, int i, int j)
 float deltaTime = 0.0f;	// time between current frame and last frame
 float lastFrame = 0.0f;
 
-ourCamera kamera(glm::vec3(11.0f, -11.0f, 20.0f));
+ourCamera kamera(glm::vec3(10.0f, -10.0f, 22.0f));
 float lastX = SCR_WIDTH / 2.0f;
 float lastY = SCR_HEIGHT /  2.0f;
 bool firstMouse = true;
 int brPoena = 0;
 
 std::pair<int,int> currPos;
-std::pair<int,int> ghostPos;
+
+std::vector<std::pair<int,int>> ghostPos(4);
+
 bool endGame = false;
 int pacmanRotation;
-int lastDirGhost = -1;
+
+std::vector<int> lastDirGhost(4, -1);
 int lastBox = 7;
 
 
@@ -63,15 +69,20 @@ int main(){
     glfwSetKeyCallback(window, pm_key_callback);
 
     srand(time(NULL));
-
     //ucitavanje matrice matrica
     initMatrix("resources/map/map01.txt");
 
 
     std::vector<ourTexture> teksture = loadTextures();
+    std::vector<ourTexture> ghostTextures = loadGhostTextures();
+
 
 
     ourShader shader("resources/shaders/cubeShader.vs", "resources/shaders/cubeShader.fs");
+    ourShader mapShader("resources/shaders/cubeShader.vs", "resources/shaders/cubeShader.fs");
+    ourShader ghostShader("resources/shaders/cubeShader.vs", "resources/shaders/cubeShader.fs");
+    ourShader pacmanShader("resources/shaders/cubeShader.vs", "resources/shaders/cubeShader.fs");
+
     ourShader shader2("resources/shaders/lightCube.vs", "resources/shaders/lightCube.fs");
 
     unsigned int VAO = initBuffers();
@@ -80,7 +91,7 @@ int main(){
     glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
-    currPos = findPosition(matrica,n,m, PACMAN);
+    restartPositions();
 
 
     glm::vec3 pointLightPositions[] = {
@@ -101,6 +112,7 @@ int main(){
     }
 
     pacmanRotation = 0;
+    ourTexture pacmanTexture = teksture[PACMAN];
 
     Shader modelShader("modelShader.vs", "modelShader.fs");
     Model nasModel("resources/objects/planet/planet.obj");
@@ -125,9 +137,18 @@ int main(){
 
         for(int i = 0; i < n; i++){
             for(int j = 0; j < m; j++){
-                renderBox(i, j, matrica[j][i], VAO, shader, teksture, kamera, pointLightPositions, numOfPointLights
-                          ,pacmanRotation);
+//                renderBox(i, j, matrica[j][i], VAO, shader, teksture, kamera, pointLightPositions, numOfPointLights
+//                          ,pacmanRotation);
+                renderMap(i, j, matrica[j][i], VAO, mapShader, teksture, kamera, pointLightPositions, numOfPointLights);
+
             }
+        }
+
+
+        renderPacman(currPos,VAO, pacmanShader, pacmanTexture, kamera, pointLightPositions, numOfPointLights, pacmanRotation);
+
+        for(int i = 0; i < 4; i++){
+            renderGhost(i, ghostShader,VAO, ghostPos, kamera, pointLightPositions, numOfPointLights, ghostTextures);
         }
 
         for(auto & pointLightPosition : pointLightPositions){
@@ -186,22 +207,16 @@ void processInput(GLFWwindow *window)
         glfwSetWindowShouldClose(window, true);
 
 }
-std::pair<int,int> findPosition(std::vector<std::vector<unsigned int>> matrica, int n, int m,unsigned int findThis){
-    for(int i = 0; i < n; i++){
-        for(int j = 0; j < m; j++){
-            if(matrica[i][j] == findThis)
-                return std::make_pair(i,j);
-        }
-    }
-    return std::make_pair(0,0);
 
-}
 
 bool isAllowedMove(std::vector<std::vector<unsigned int>> matrica, int i, int j){
-    if(matrica[i][j] == FOOD_BOX || matrica[i][j] == NO_BOX || matrica[i][j] == GHOST3 || matrica[i][j] == PACMAN)
-        return true;
+//    if(matrica[i][j] == FOOD_BOX || matrica[i][j] == NO_BOX || matrica[i][j] == GHOST3 || matrica[i][j] == PACMAN)
+//        return true;
 
-    return false;
+    if(matrica[i][j] == WALL_BOX)
+        return false;
+
+    return true;
 }
 
 void pm_key_callback(GLFWwindow *window, int key, int scancode, int action, int mods){
@@ -217,28 +232,27 @@ void pm_key_callback(GLFWwindow *window, int key, int scancode, int action, int 
             if(matrica[i-1][j] == 2)
                 brPoena++;
             matrica[i][j] = 7;
-            matrica[i-1][j] = PACMAN;
             currPos = std::make_pair(i-1,j);
             pacmanRotation = 1;
             moved = true;
         }
-
+        std:: cout << i << " " << j << std::endl;
     }
     else if(key == GLFW_KEY_DOWN  && action == GLFW_PRESS ){
         if(isAllowedMove(matrica,i+1,j)){
             if(matrica[i+1][j] == 2)
                 brPoena++;
             matrica[i][j] = 7;
-            matrica[i+1][j] = PACMAN;
             currPos = std::make_pair(i+1,j);
             pacmanRotation = 3;
             moved = true;
         }
+        std:: cout << i << " " << j << std::endl;
+
     }
     else if(key == GLFW_KEY_LEFT  && action == GLFW_PRESS){
         if(i == 9 && j == 0){
             currPos = std::make_pair(9,20);
-            matrica[9][20] = PACMAN;
             matrica[i][j] = 7;
             pacmanRotation = 2;
             ind = true;
@@ -247,19 +261,19 @@ void pm_key_callback(GLFWwindow *window, int key, int scancode, int action, int 
             if(matrica[i][j-1] == 2)
                 brPoena++;
             matrica[i][j] = 7;
-            matrica[i][j-1] = PACMAN;
             currPos = std::make_pair(i,j-1);
             pacmanRotation = 2;
             ind = true;
         }
         if(ind)
             moved = true;
+        std:: cout << i << " " << j << std::endl;
+
 
     }
     else if(key == GLFW_KEY_RIGHT  && action == GLFW_PRESS){
         if(i == 9 && j == 20){
             currPos = std::make_pair(9,0);
-            matrica[9][0] = 5;
             matrica[i][j] = 7;
             pacmanRotation = 0;
             ind = true;
@@ -269,13 +283,14 @@ void pm_key_callback(GLFWwindow *window, int key, int scancode, int action, int 
             if(matrica[i][j+1] == 2)
                 brPoena++;
             matrica[i][j] = 7;
-            matrica[i][j+1] = 5;
             currPos = std::make_pair(i,j+1);
             pacmanRotation = 0;
             ind = true;
         }
         if(ind)
             moved = true;
+        std:: cout << i << " " << j << std::endl;
+
     }
 
     if(moved){
@@ -284,7 +299,7 @@ void pm_key_callback(GLFWwindow *window, int key, int scancode, int action, int 
             newGame();
             return;
         }
-        moveGhost();
+        moveAllGhosts();
         isEndGame();
         if(endGame){
             newGame();
@@ -294,6 +309,10 @@ void pm_key_callback(GLFWwindow *window, int key, int scancode, int action, int 
 
     if(key == GLFW_KEY_N && action == GLFW_PRESS){
         newGame();
+    }
+
+    if(key == GLFW_KEY_K && action == GLFW_PRESS){
+        kamera.resetCamera(glm::vec3(10.0f, -10.0f, 22.0f));
     }
 
     if (key == GLFW_KEY_F && action == GLFW_PRESS) {
@@ -306,96 +325,124 @@ void pm_key_callback(GLFWwindow *window, int key, int scancode, int action, int 
 }
 
 void isEndGame(){
-    if(currPos.first == ghostPos.first && currPos.second == ghostPos.second)
-        endGame = true;
+    for(int i = 0; i < 4; i++){
+        if(currPos.first == ghostPos[i].first && currPos.second == ghostPos[i].second){
+            endGame = true;
+            break;
+        }
+    }
     if(brPoena == BROJ_POLJA)
         endGame = true;
 
 }
+
+void restartPositions(){
+    currPos = std::make_pair(15,10);
+
+    std::pair<int,int> par0 = std::make_pair(8, 10);
+    std::pair<int,int> par1 = std::make_pair(9, 9);
+    std::pair<int,int> par2 = std::make_pair(9, 10);
+    std::pair<int,int> par3 = std::make_pair(9, 11);
+
+    ghostPos[0] = par0;
+    ghostPos[1] = par1;
+    ghostPos[2] = par2;
+    ghostPos[3] = par3;
+
+}
+
 void newGame(){
     restartMatrix();
-    currPos = findPosition(matrica, n, m, PACMAN);
+    restartPositions();
+
+
     brPoena = 0;
     pacmanRotation = 0;
-    lastDirGhost = -1;
+    lastDirGhost = {-1,-1,-1,-1};
+
     lastBox = NO_BOX;
     endGame = false;
 }
 
-void moveGhost(){
-    ghostPos = findPosition(matrica,n,m,GHOST3);
-    int g_i = ghostPos.first;
-    int g_j = ghostPos.second;
-    std::cout << g_i << "  " << g_j << std::endl;
+void moveAllGhosts(){
+    for(int i = 0; i < 4; i++){
+        moveGhost(i);
+    }
 
-    //
+}
+
+int numMovingDir(std::pair<int,int> pos){
+    int posi = pos.first;
+    int posj = pos.second;
+    int count = 0;
+    if(matrica[posi-1][posj] != WALL_BOX)
+        count++;
+    if(matrica[posi+1][posj] != WALL_BOX)
+        count++;
+    if(matrica[posi][posj+1] != WALL_BOX)
+        count++;
+    if(matrica[posi][posj-1] != WALL_BOX)
+        count++;
+
+    return count;
+
+}
+
+void moveGhost(int num){
+
+    int g_i = ghostPos[num].first;
+    int g_j = ghostPos[num].second;
+
+
+    if(numMovingDir(ghostPos[num]) == 1)
+        lastDirGhost[num] = -1;
+
     while(1){
         int dir = rand() % 4;
+
         //gore
-        if(dir == 1 && lastDirGhost != 3){
+        if(dir == 1 && lastDirGhost[num] != 3){
             if(isAllowedMove(matrica, g_i-1,g_j)){
-                matrica[g_i][g_j] = lastBox;
-                lastBox = matrica[g_i-1][g_j];
-                matrica[g_i-1][g_j] = GHOST3;
-                lastDirGhost = 1;
-                ghostPos = std::make_pair(g_i-1,g_j);
+                lastDirGhost[num] = 1;
+                ghostPos[num] = std::make_pair(g_i-1,g_j);
                 return;
             }
         }
         //levo
-        if(dir == 2 && lastDirGhost != 0){
+        if(dir == 2 && lastDirGhost[num] != 0){
             if(g_i == 9 && g_j == 0){
-                matrica[g_i][g_j] = lastBox;
-                lastBox = matrica[9][20];
-                matrica[9][20] = GHOST3;
-                lastDirGhost = 2;
-                ghostPos = std::make_pair(9,20);
+                lastDirGhost[num] = 2;
+                ghostPos[num] = std::make_pair(9,20);
                 return;
             }
             if(isAllowedMove(matrica, g_i,g_j-1)){
-                matrica[g_i][g_j] = lastBox;
-                lastBox = matrica[g_i][g_j-1];
-                matrica[g_i][g_j-1] = GHOST3;
-                lastDirGhost = 2;
-                ghostPos = std::make_pair(g_i,g_j-1);
+                lastDirGhost[num] = 2;
+                ghostPos[num] = std::make_pair(g_i,g_j-1);
                 return;
-
             }
 
         }
         //dole
-        if(dir == 3 && lastDirGhost != 1){
+        if(dir == 3 && lastDirGhost[num] != 1){
             if(isAllowedMove(matrica, g_i+1,g_j)){
-                matrica[g_i][g_j] = lastBox;
-                lastBox = matrica[g_i+1][g_j];
-                matrica[g_i+1][g_j] = GHOST3;
-                lastDirGhost = 3;
-                ghostPos = std::make_pair(g_i+1,g_j);
+                lastDirGhost[num] = 3;
+                ghostPos[num] = std::make_pair(g_i+1,g_j);
                 return;
-
             }
 
         }
         //desno
-        if(dir == 0 && lastDirGhost != 2){
+        if(dir == 0 && lastDirGhost[num] != 2){
             if(g_i == 9 && g_j == 20){
-                matrica[g_i][g_j] = lastBox;
-                lastBox = matrica[9][0];
-                matrica[9][0] = GHOST3;
-                lastDirGhost = 0;
-                ghostPos = std::make_pair(9,0);
+                lastDirGhost[num] = 0;
+                ghostPos[num] = std::make_pair(9,0);
                 return;
             }
             if(isAllowedMove(matrica, g_i,g_j+1)){
-                matrica[g_i][g_j] = lastBox;
-                lastBox = matrica[g_i][g_j+1];
-                matrica[g_i][g_j+1] = GHOST3;
-                lastDirGhost = 0;
-                ghostPos = std::make_pair(g_i,g_j+1);
+                lastDirGhost[num] = 0;
+                ghostPos[num] = std::make_pair(g_i,g_j+1);
                 return;
-
             }
-
         }
 
     }
