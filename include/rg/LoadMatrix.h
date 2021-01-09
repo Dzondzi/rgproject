@@ -22,15 +22,15 @@ public:
         std::ifstream myfile;
         myfile.open(filePath);
         if(!myfile){
-            std::cerr << "myfile failed to open \n";
+            std::cerr << "Myfile failed to open! \n";
             exit(EXIT_FAILURE);
         }
         myfile >> n >> m;
-       if(n < 1 || m < 1){
+        if(n < 1 || m < 1){
            std::cerr << "n or m < 1 \n";
            exit(EXIT_FAILURE);
-       }
-        std::cerr << n << " " <<m;
+        }
+        std::cerr << n << " " << m;
         std::vector<unsigned int> pom(m);
         int x;
         for(int j = 0; j < n; j++) {

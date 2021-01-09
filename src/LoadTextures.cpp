@@ -5,7 +5,7 @@
 #include <rg/LoadTextures.h>
 
 std::vector<ourTexture> loadGhostTextures(){
-    std::vector<ourTexture> teksture;
+    std::vector<ourTexture> textures;
 
     ourTexture tex0("resources/textures/ghost1.png");
     ourTexture tex1("resources/textures/ghost2.png");
@@ -13,16 +13,16 @@ std::vector<ourTexture> loadGhostTextures(){
     ourTexture tex3("resources/textures/ghost4.png");
 
 
-    teksture.push_back(tex0);
-    teksture.push_back(tex1);
-    teksture.push_back(tex2);
-    teksture.push_back(tex3);
+    textures.push_back(tex0);
+    textures.push_back(tex1);
+    textures.push_back(tex2);
+    textures.push_back(tex3);
 
-    for(auto &tekstura : teksture){
+    for(auto &tekstura : textures){
         tekstura.setWrappingST(GL_CLAMP_TO_BORDER, GL_CLAMP_TO_BORDER);
     }
 
-    return teksture;
+    return textures;
 
 }
 

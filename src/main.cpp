@@ -112,15 +112,14 @@ int main(){
 
     pacmanRotation = 0;
     ourTexture pacmanTexture = textures[PACMAN];
-    textures[PACMAN].setWrappingST(GL_CLAMP_TO_EDGE, GL_CLAMP_TO_BORDER);
+    textures[PACMAN].setWrappingST(GL_REPEAT, GL_REPEAT);
 
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    //ovo ne treba
+    //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
     Shader modelShader("modelShader.vs", "modelShader.fs");
-    Model outModel("resources/objects/planet/planet.obj");
-
-
+    Model modelMars("resources/objects/planet/planet.obj");
 
     while (!glfwWindowShouldClose(window))
     {
@@ -157,7 +156,7 @@ int main(){
         }
 
         for(auto & pointLightPosition : pointLightPositions){
-            renderModel(outModel, modelShader, mainCamera, pointLightPosition);
+            renderModel(modelMars, modelShader, mainCamera, pointLightPosition);
         }
 
 

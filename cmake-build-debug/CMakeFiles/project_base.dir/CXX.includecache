@@ -250,10 +250,6 @@ imgui.h
 TargetConditionals.h
 ../libs/imgui/include/TargetConditionals.h
 
-/home/marko/Desktop/proba/rgproject/src/LoadTextures.cpp
-rg/LoadTextures.h
--
-
 /home/marko/Desktop/proba/rgproject/src/main.cpp
 imgui.h
 /home/marko/Desktop/proba/rgproject/src/imgui.h
