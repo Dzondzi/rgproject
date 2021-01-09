@@ -12,10 +12,15 @@ std::vector<ourTexture> loadGhostTextures(){
     ourTexture tex2("resources/textures/ghost3.png");
     ourTexture tex3("resources/textures/ghost4.png");
 
+
     teksture.push_back(tex0);
     teksture.push_back(tex1);
     teksture.push_back(tex2);
     teksture.push_back(tex3);
+
+    for(auto &tekstura : teksture){
+        tekstura.setWrappingST(GL_CLAMP_TO_BORDER, GL_CLAMP_TO_BORDER);
+    }
 
     return teksture;
 

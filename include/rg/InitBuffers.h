@@ -8,6 +8,8 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+
+unsigned int initFIGBuffers();
 unsigned int initBuffers();
 unsigned int initEBOBuffers();
 

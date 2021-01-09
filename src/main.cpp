@@ -78,13 +78,15 @@ int main(){
 
 
     ourShader mapShader("resources/shaders/cubeShader.vs", "resources/shaders/cubeShader.fs");
-    ourShader ghostShader("resources/shaders/cubeShader.vs", "resources/shaders/cubeShader.fs");
-    ourShader pacmanShader("resources/shaders/cubeShader.vs", "resources/shaders/cubeShader.fs");
+    ourShader ghostShader("resources/shaders/pacmanShader.vs", "resources/shaders/pacmanShader.fs");
+
+    ourShader pacmanShader("resources/shaders/pacmanShader.vs", "resources/shaders/pacmanShader.fs");
 
     ourShader shader2("resources/shaders/lightCube.vs", "resources/shaders/lightCube.fs");
 
     unsigned int VAO = initBuffers();
     unsigned int VAO2 = initEBOBuffers();
+    unsigned int VAOfig = initFIGBuffers();
 
     glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -110,9 +112,15 @@ int main(){
 
     pacmanRotation = 0;
     ourTexture pacmanTexture = teksture[PACMAN];
+    teksture[PACMAN].setWrappingST(GL_CLAMP_TO_EDGE, GL_CLAMP_TO_BORDER);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
     Shader modelShader("modelShader.vs", "modelShader.fs");
     Model nasModel("resources/objects/planet/planet.obj");
+
+
 
     while (!glfwWindowShouldClose(window))
     {
@@ -138,10 +146,10 @@ int main(){
             }
         }
 
-        renderPacman(currPos,VAO, pacmanShader, pacmanTexture, kamera, pointLightPositions, numOfPointLights, pacmanRotation);
+        renderPacman(currPos,VAOfig, pacmanShader, pacmanTexture, kamera, pointLightPositions, numOfPointLights, pacmanRotation);
 
         for(int i = 0; i < 4; i++){
-            renderGhost(i, ghostShader,VAO, ghostPos, kamera, pointLightPositions, numOfPointLights, ghostTextures);
+            renderGhost(i, ghostShader,VAOfig, ghostPos, kamera, pointLightPositions, numOfPointLights, ghostTextures);
         }
 
         for(auto & pointLightPosition : pointLightPositions){
@@ -164,6 +172,10 @@ int main(){
 
     // glfw: terminate, clearing all previously allocated GLFW resources.
     // ------------------------------------------------------------------
+    glDeleteVertexArrays(1,&VAO);
+    glDeleteVertexArrays(1,&VAO2);
+    glDeleteVertexArrays(1,&VAOfig);
+
     glfwTerminate();
     return 0;
 }
@@ -187,8 +199,6 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
     kamera.ProcessMouseMovement(xoffset, yoffset);
 }
 
-// glfw: whenever the mouse scroll wheel scrolls, this callback is called
-// ----------------------------------------------------------------------
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
     kamera.ProcessMouseScroll(yoffset);
@@ -200,7 +210,6 @@ void processInput(GLFWwindow *window)
         glfwSetWindowShouldClose(window, true);
 
 }
-
 
 bool isAllowedMove(std::vector<std::vector<unsigned int>> matrica, int i, int j){
 

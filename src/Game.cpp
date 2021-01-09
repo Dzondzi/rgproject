@@ -66,7 +66,7 @@ void renderGhost(int i, ourShader shader,unsigned int VAO, std::vector<std::pair
     shader.use();
 
     glBindVertexArray(VAO);
-    glDrawArrays(GL_TRIANGLES,0,36);
+    glDrawArrays(GL_TRIANGLES,0,6);
 
 
 }
@@ -120,7 +120,7 @@ void renderPacman(std::pair<int,int> currPos,unsigned int VAO,ourShader shader,o
     shader.use();
 
     glBindVertexArray(VAO);
-    glDrawArrays(GL_TRIANGLES,0,36);
+    glDrawArrays(GL_TRIANGLES,0,6);
 
 }
 
@@ -202,96 +202,6 @@ void renderMap(int i,int j,int type,unsigned int VAO,ourShader shader, std::vect
 
 
 
-}
-
-
-
-void renderBox(int i, int j, int type, unsigned int VAO, ourShader shader,std::vector<ourTexture> teksture, ourCamera camera,
-               glm::vec3 pointLightPositions[],int numOfPointLights, int pacmanRotation){
-
-    if(type == 0)
-        return;
-
-
-    glm::vec3 scalingVector = glm::vec3(1.f);
-
-    shader.use();
-    shader.setVec3("viewPos", camera.Position);
-    shader.setFloat("material.shininess", 32.0f);
-
-
-    glm::vec3 ambient = glm::vec3(0.05f, 0.05f, 0.05f);
-    glm::vec3 diffuse = glm::vec3(0.8f, 0.8f, 0.8f);
-    glm::vec3 specular = glm::vec3(0.5f, 0.5f, 0.5f);
-    float constant = 0.1f;
-    float linear = 0.09f;
-    float quadratic = 0.032f;
-
-
-    //setting point light TODO foreach petlja
-    for(int i = 0; i < numOfPointLights; i++) {
-        setPointLight(shader, ambient, diffuse, specular, constant, linear, quadratic, pointLightPositions[i], i);
-    }
-
-    //setting direction light
-    shader.setVec3("dirLight.direction", 0.0f, 0.0f, -1.f);
-    shader.setVec3("dirLight.ambient", 0.05f, 0.05f, 0.05f);
-    shader.setVec3("dirLight.diffuse", 0.5f, 0.5f, 0.5f);
-    shader.setVec3("dirLight.specular", 0.5f, 0.5f, 0.5f);
-
-
-    glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
-    shader.setMat4("projection", projection);
-
-    glm::mat4 view = camera.GetViewMatrix();
-    shader.setMat4("view", view);
-
-    if(type == FOOD_BOX){
-        scalingVector*=0.2;
-    }
-    //trik koji cini da gornja kocka nestane TODO srediti naci bolje resenje
-    if(type == NO_BOX){
-        scalingVector*=0.001f;
-    }
-
-
-    glm::mat4 model = glm::mat4(1.0f); // make sure to initialize matrix to identity matrix first
-    model = glm::translate(model, glm::vec3((float)(i),(float)(-j), 0.0));
-    if(type == PACMAN){
-        float rotation = pacmanRotation * 90.f;
-        model = glm::rotate(model, glm::radians(rotation), glm::vec3(0.f,0.f,1.f));
-    }
-    model = glm::scale(model, scalingVector);
-    shader.setMat4("model", model);
-
-    shader.use();
-    teksture[type].activateTexture(type);
-    teksture[FLOOR_BOX].activateTexture(FLOOR_BOX);
-
-    shader.setInt("material.diffuse", type);
-    shader.setInt("material.specular", FLOOR_BOX);
-
-
-    glBindVertexArray(VAO);
-
-    shader.use();
-
-    glBindVertexArray(VAO);
-    glDrawArrays(GL_TRIANGLES,0,36);
-
-//donja strana mape
-
-
-    model = glm::mat4(1.0f); // make sure to initialize matrix to identity matrix first
-    model = glm::translate(model, glm::vec3((float)(i),(float)(-j), -1.0));
-    shader.setMat4("model", model);
-
-    teksture[FLOOR_BOX].activateTexture(FLOOR_BOX);
-    teksture[FLOOR_SPECULAR].activateTexture(FLOOR_SPECULAR);
-    shader.setInt("material.diffuse", FLOOR_BOX);
-    shader.setInt("material.specular", FLOOR_SPECULAR);
-
-    glDrawArrays(GL_TRIANGLES,0,36);
 }
 
 void renderLightCube(unsigned int VAO, ourShader shader,ourCamera camera, glm::vec3 pointLightPosition){

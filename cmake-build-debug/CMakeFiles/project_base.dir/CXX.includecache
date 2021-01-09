@@ -258,14 +258,8 @@ rg/StartingGlfwInit.h
 string
 -
 
-/home/dzondzi/Desktop/grafa/rgproject/src/StartingCallbackInit.cpp
-rg/StartingCallbackInit.h
--
-rg/StartingGlfwInit.h
--
-
-/home/dzondzi/Desktop/grafa/rgproject/src/StartingGlfwInit.cpp
-rg/StartingGlfwInit.h
+/home/dzondzi/Desktop/grafa/rgproject/src/LoadTextures.cpp
+rg/LoadTextures.h
 -
 
 /home/dzondzi/Desktop/grafa/rgproject/src/main.cpp
