@@ -28,7 +28,7 @@ std::vector<ourTexture> loadGhostTextures(){
 
 
 std::vector<ourTexture> loadTextures(){
-    std::vector<ourTexture> teksture;
+    std::vector<ourTexture> textures;
 
     ourTexture tex0("resources/textures/container.jpg");
     ourTexture tex1("resources/textures/pacwall.jpg");
@@ -43,19 +43,19 @@ std::vector<ourTexture> loadTextures(){
     ourTexture tex10("resources/textures/stripes3.jpg");
 
 
-    teksture.push_back(tex0);
-    teksture.push_back(tex1);
-    teksture.push_back(tex2);
-    teksture.push_back(tex3);
-    teksture.push_back(tex4);
-    teksture.push_back(tex5);
-    teksture.push_back(tex6);
-    teksture.push_back(tex7);
-    teksture.push_back(tex8);
-    teksture.push_back(tex9);
-    teksture.push_back(tex10);
+    textures.push_back(tex0);
+    textures.push_back(tex1);
+    textures.push_back(tex2);
+    textures.push_back(tex3);
+    textures.push_back(tex4);
+    textures.push_back(tex5);
+    textures.push_back(tex6);
+    textures.push_back(tex7);
+    textures.push_back(tex8);
+    textures.push_back(tex9);
+    textures.push_back(tex10);
 
 
-    return teksture;
+    return textures;
 
 }

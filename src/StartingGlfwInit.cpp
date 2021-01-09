@@ -30,23 +30,20 @@ void ourGlfwInit(){
 
     glfwMakeContextCurrent(window);
 
-// tell GLFW to capture our mouse
+
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
-// glad: load all OpenGL function pointers
-// ---------------------------------------
+
     if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress)) {
         std::cout << "Failed to initialize GLAD" << std::endl;
         exit(EXIT_FAILURE);
     }
 
     glEnable(GL_DEPTH_TEST);
-// tell stb_image.h to flip loaded texture's on the y-axis (before loading model).
     stbi_set_flip_vertically_on_load(true);
 }
 
-// process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly
-// ---------------------------------------------------------------------------------------------------------
+
 
 
 

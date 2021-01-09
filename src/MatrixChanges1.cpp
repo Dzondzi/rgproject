@@ -5,8 +5,8 @@
 
 #include <rg/MatrixChanges1.h>
 
-std::vector<std::vector<unsigned int>> matrica;
-std::vector<std::vector<unsigned int>> pocMatrica;
+std::vector<std::vector<unsigned int>> outMatrix;
+std::vector<std::vector<unsigned int>> initialMatrix;
 
 int n;
 int m;
@@ -16,12 +16,12 @@ void initMatrix(std::string path){
     Matrix matrix(path);
     n = matrix.getN();
     m = matrix.getM();
-    matrica = matrix.getMatrix();
-    pocMatrica = matrix.getMatrix();
+    outMatrix = matrix.getMatrix();
+    initialMatrix = matrix.getMatrix();
 }
 
 void restartMatrix(){
-    matrica = pocMatrica;
+    outMatrix = initialMatrix;
 }
 
 
