@@ -64,6 +64,14 @@ rg/ourTexture.h
 rg/ourCamera.h
 -
 
+../include/rg/Gameplay.h
+iostream
+-
+vector
+-
+rg/LoadMatrix.h
+-
+
 ../include/rg/InitBuffers.h
 glad/glad.h
 -
@@ -250,12 +258,12 @@ imgui.h
 TargetConditionals.h
 ../libs/imgui/include/TargetConditionals.h
 
-/home/dzondzi/Desktop/grafa/rgproject/src/Game.cpp
+/home/dzondzi/Desktop/grafa/rgproject/src/Gameplay.cpp
 rg/Game.h
 -
-rg/StartingGlfwInit.h
+rg/Gameplay.h
 -
-string
+iostream
 -
 
 /home/dzondzi/Desktop/grafa/rgproject/src/main.cpp
@@ -290,6 +298,8 @@ rg/ourCamera.h
 learnopengl/shader.h
 -
 time.h
+-
+rg/Gameplay.h
 -
 
 configuration/root_directory.h

@@ -236,6 +236,9 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/dzondzi/Desktop/grafa/rgproject/include/rg/Gameplay.h">
+			<Option target="project_base"/>
+		</Unit>
 		<Unit filename="/home/dzondzi/Desktop/grafa/rgproject/include/rg/InitBuffers.h">
 			<Option target="project_base"/>
 		</Unit>
@@ -300,6 +303,9 @@
 			<Option target="STB_IMAGE"/>
 		</Unit>
 		<Unit filename="/home/dzondzi/Desktop/grafa/rgproject/src/Game.cpp">
+			<Option target="project_base"/>
+		</Unit>
+		<Unit filename="/home/dzondzi/Desktop/grafa/rgproject/src/Gameplay.cpp">
 			<Option target="project_base"/>
 		</Unit>
 		<Unit filename="/home/dzondzi/Desktop/grafa/rgproject/src/InitBuffers.cpp">

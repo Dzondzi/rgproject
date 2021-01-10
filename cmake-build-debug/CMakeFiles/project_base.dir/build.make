@@ -90,9 +90,22 @@ CMakeFiles/project_base.dir/src/Game.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/project_base.dir/src/Game.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dzondzi/Desktop/grafa/rgproject/src/Game.cpp -o CMakeFiles/project_base.dir/src/Game.cpp.s
 
+CMakeFiles/project_base.dir/src/Gameplay.cpp.o: CMakeFiles/project_base.dir/flags.make
+CMakeFiles/project_base.dir/src/Gameplay.cpp.o: ../src/Gameplay.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dzondzi/Desktop/grafa/rgproject/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/project_base.dir/src/Gameplay.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/project_base.dir/src/Gameplay.cpp.o -c /home/dzondzi/Desktop/grafa/rgproject/src/Gameplay.cpp
+
+CMakeFiles/project_base.dir/src/Gameplay.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/project_base.dir/src/Gameplay.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dzondzi/Desktop/grafa/rgproject/src/Gameplay.cpp > CMakeFiles/project_base.dir/src/Gameplay.cpp.i
+
+CMakeFiles/project_base.dir/src/Gameplay.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/project_base.dir/src/Gameplay.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dzondzi/Desktop/grafa/rgproject/src/Gameplay.cpp -o CMakeFiles/project_base.dir/src/Gameplay.cpp.s
+
 CMakeFiles/project_base.dir/src/InitBuffers.cpp.o: CMakeFiles/project_base.dir/flags.make
 CMakeFiles/project_base.dir/src/InitBuffers.cpp.o: ../src/InitBuffers.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dzondzi/Desktop/grafa/rgproject/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/project_base.dir/src/InitBuffers.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dzondzi/Desktop/grafa/rgproject/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/project_base.dir/src/InitBuffers.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/project_base.dir/src/InitBuffers.cpp.o -c /home/dzondzi/Desktop/grafa/rgproject/src/InitBuffers.cpp
 
 CMakeFiles/project_base.dir/src/InitBuffers.cpp.i: cmake_force
@@ -105,7 +118,7 @@ CMakeFiles/project_base.dir/src/InitBuffers.cpp.s: cmake_force
 
 CMakeFiles/project_base.dir/src/LoadTextures.cpp.o: CMakeFiles/project_base.dir/flags.make
 CMakeFiles/project_base.dir/src/LoadTextures.cpp.o: ../src/LoadTextures.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dzondzi/Desktop/grafa/rgproject/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/project_base.dir/src/LoadTextures.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dzondzi/Desktop/grafa/rgproject/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/project_base.dir/src/LoadTextures.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/project_base.dir/src/LoadTextures.cpp.o -c /home/dzondzi/Desktop/grafa/rgproject/src/LoadTextures.cpp
 
 CMakeFiles/project_base.dir/src/LoadTextures.cpp.i: cmake_force
@@ -118,7 +131,7 @@ CMakeFiles/project_base.dir/src/LoadTextures.cpp.s: cmake_force
 
 CMakeFiles/project_base.dir/src/MatrixChanges1.cpp.o: CMakeFiles/project_base.dir/flags.make
 CMakeFiles/project_base.dir/src/MatrixChanges1.cpp.o: ../src/MatrixChanges1.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dzondzi/Desktop/grafa/rgproject/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/project_base.dir/src/MatrixChanges1.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dzondzi/Desktop/grafa/rgproject/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/project_base.dir/src/MatrixChanges1.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/project_base.dir/src/MatrixChanges1.cpp.o -c /home/dzondzi/Desktop/grafa/rgproject/src/MatrixChanges1.cpp
 
 CMakeFiles/project_base.dir/src/MatrixChanges1.cpp.i: cmake_force
@@ -131,7 +144,7 @@ CMakeFiles/project_base.dir/src/MatrixChanges1.cpp.s: cmake_force
 
 CMakeFiles/project_base.dir/src/StartingCallbackInit.cpp.o: CMakeFiles/project_base.dir/flags.make
 CMakeFiles/project_base.dir/src/StartingCallbackInit.cpp.o: ../src/StartingCallbackInit.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dzondzi/Desktop/grafa/rgproject/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/project_base.dir/src/StartingCallbackInit.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dzondzi/Desktop/grafa/rgproject/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/project_base.dir/src/StartingCallbackInit.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/project_base.dir/src/StartingCallbackInit.cpp.o -c /home/dzondzi/Desktop/grafa/rgproject/src/StartingCallbackInit.cpp
 
 CMakeFiles/project_base.dir/src/StartingCallbackInit.cpp.i: cmake_force
@@ -144,7 +157,7 @@ CMakeFiles/project_base.dir/src/StartingCallbackInit.cpp.s: cmake_force
 
 CMakeFiles/project_base.dir/src/StartingGlfwInit.cpp.o: CMakeFiles/project_base.dir/flags.make
 CMakeFiles/project_base.dir/src/StartingGlfwInit.cpp.o: ../src/StartingGlfwInit.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dzondzi/Desktop/grafa/rgproject/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/project_base.dir/src/StartingGlfwInit.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dzondzi/Desktop/grafa/rgproject/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/project_base.dir/src/StartingGlfwInit.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/project_base.dir/src/StartingGlfwInit.cpp.o -c /home/dzondzi/Desktop/grafa/rgproject/src/StartingGlfwInit.cpp
 
 CMakeFiles/project_base.dir/src/StartingGlfwInit.cpp.i: cmake_force
@@ -157,7 +170,7 @@ CMakeFiles/project_base.dir/src/StartingGlfwInit.cpp.s: cmake_force
 
 CMakeFiles/project_base.dir/src/main.cpp.o: CMakeFiles/project_base.dir/flags.make
 CMakeFiles/project_base.dir/src/main.cpp.o: ../src/main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dzondzi/Desktop/grafa/rgproject/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/project_base.dir/src/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dzondzi/Desktop/grafa/rgproject/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/project_base.dir/src/main.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/project_base.dir/src/main.cpp.o -c /home/dzondzi/Desktop/grafa/rgproject/src/main.cpp
 
 CMakeFiles/project_base.dir/src/main.cpp.i: cmake_force
@@ -171,6 +184,7 @@ CMakeFiles/project_base.dir/src/main.cpp.s: cmake_force
 # Object files for target project_base
 project_base_OBJECTS = \
 "CMakeFiles/project_base.dir/src/Game.cpp.o" \
+"CMakeFiles/project_base.dir/src/Gameplay.cpp.o" \
 "CMakeFiles/project_base.dir/src/InitBuffers.cpp.o" \
 "CMakeFiles/project_base.dir/src/LoadTextures.cpp.o" \
 "CMakeFiles/project_base.dir/src/MatrixChanges1.cpp.o" \
@@ -182,6 +196,7 @@ project_base_OBJECTS = \
 project_base_EXTERNAL_OBJECTS =
 
 ../project_base: CMakeFiles/project_base.dir/src/Game.cpp.o
+../project_base: CMakeFiles/project_base.dir/src/Gameplay.cpp.o
 ../project_base: CMakeFiles/project_base.dir/src/InitBuffers.cpp.o
 ../project_base: CMakeFiles/project_base.dir/src/LoadTextures.cpp.o
 ../project_base: CMakeFiles/project_base.dir/src/MatrixChanges1.cpp.o
@@ -197,7 +212,7 @@ project_base_EXTERNAL_OBJECTS =
 ../project_base: /usr/lib/x86_64-linux-gnu/libOpenGL.so
 ../project_base: libs/glad/libglad.a
 ../project_base: CMakeFiles/project_base.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/dzondzi/Desktop/grafa/rgproject/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable ../project_base"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/dzondzi/Desktop/grafa/rgproject/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable ../project_base"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/project_base.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

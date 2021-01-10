@@ -5,6 +5,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
   "/home/dzondzi/Desktop/grafa/rgproject/src/Game.cpp" "/home/dzondzi/Desktop/grafa/rgproject/cmake-build-debug/CMakeFiles/project_base.dir/src/Game.cpp.o"
+  "/home/dzondzi/Desktop/grafa/rgproject/src/Gameplay.cpp" "/home/dzondzi/Desktop/grafa/rgproject/cmake-build-debug/CMakeFiles/project_base.dir/src/Gameplay.cpp.o"
   "/home/dzondzi/Desktop/grafa/rgproject/src/InitBuffers.cpp" "/home/dzondzi/Desktop/grafa/rgproject/cmake-build-debug/CMakeFiles/project_base.dir/src/InitBuffers.cpp.o"
   "/home/dzondzi/Desktop/grafa/rgproject/src/LoadTextures.cpp" "/home/dzondzi/Desktop/grafa/rgproject/cmake-build-debug/CMakeFiles/project_base.dir/src/LoadTextures.cpp.o"
   "/home/dzondzi/Desktop/grafa/rgproject/src/MatrixChanges1.cpp" "/home/dzondzi/Desktop/grafa/rgproject/cmake-build-debug/CMakeFiles/project_base.dir/src/MatrixChanges1.cpp.o"

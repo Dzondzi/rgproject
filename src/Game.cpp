@@ -27,13 +27,13 @@ extern int randNum;
 void renderGhost(int i, ourShader shader,unsigned int VAO, std::vector<std::pair<int,int>> ghostPos, ourCamera camera,
                  glm::vec3 pointLightPositions[], int numOfPointLights, std::vector<ourTexture> ghostTextures){
 
-    float koef = (float)(150-brPoena) * (150-brPoena) / (22500);
-    float koef2 = (float)(150-brPoena) / 150;
+    float quadraticFactor = (float)((150-brPoena) * (150-brPoena)) / (22500);
+    float linearFactor = (float)(150-brPoena) / 150;
 
     if(brPoena > 70){
         if(randNum == 1){
-            koef = 1.f;
-            koef2 = 1.f;
+            quadraticFactor = 1.f;
+            linearFactor = 1.f;
         }
     }
 
@@ -44,24 +44,24 @@ void renderGhost(int i, ourShader shader,unsigned int VAO, std::vector<std::pair
     shader.setVec3("viewPos", camera.Position);
     shader.setFloat("material.shininess", 16.0f);
 
-    glm::vec3 ambient = glm::vec3(0.05f * koef2 , 0.05f* koef2 , 0.05f * koef2 );
-    glm::vec3 diffuse = glm::vec3(0.4f * koef2 + 0.2, 0.4f * koef2 + 0.2, 0.4f * koef2 + 0.2);
-    glm::vec3 specular = glm::vec3(0.2f * koef2, 0.2f * koef2, 0.2f * koef2);
+    glm::vec3 ambient = glm::vec3(0.05f * linearFactor , 0.05f* linearFactor , 0.05f * linearFactor );
+    glm::vec3 diffuse = glm::vec3(0.4f * linearFactor + 0.2, 0.4f * linearFactor + 0.2, 0.4f * linearFactor + 0.2);
+    glm::vec3 specular = glm::vec3(0.2f * linearFactor, 0.2f * linearFactor, 0.2f * linearFactor);
 
     float constant = 1.0f;
     float linear = 0.09f;
     float quadratic = 0.30f;
 
-    //setting point light TODO foreach petlja
+    //setting point light
     for(int i = 0; i < numOfPointLights; i++) {
         setPointLight(shader, ambient, diffuse, specular, constant, linear, quadratic, pointLightPositions[i], i);
     }
 
     //setting direction light
     shader.setVec3("dirLight.direction", 0.0f, 0.0f, -1.f);
-    shader.setVec3("dirLight.ambient", 0.02f * koef, 0.02f * koef, 0.02f * koef);
-    shader.setVec3("dirLight.diffuse", 0.2f * koef, 0.2f * koef, 0.2f*koef);
-    shader.setVec3("dirLight.specular", 0.2f*koef, 0.2f*koef, 0.2f*koef);
+    shader.setVec3("dirLight.ambient", 0.02f * quadraticFactor, 0.02f * quadraticFactor, 0.02f * quadraticFactor);
+    shader.setVec3("dirLight.diffuse", 0.2f * quadraticFactor, 0.2f * quadraticFactor, 0.2f*quadraticFactor);
+    shader.setVec3("dirLight.specular", 0.2f*quadraticFactor, 0.2f*quadraticFactor, 0.2f*quadraticFactor);
 
 
     glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, Z_NEAR, Z_FAR);
@@ -93,9 +93,22 @@ void renderGhost(int i, ourShader shader,unsigned int VAO, std::vector<std::pair
 void renderSkybox(ourShader shader,unsigned int VAOskybox,ourCamera mainCamera, unsigned int skyboxTexture){
 
 
-
     glDepthFunc(GL_LEQUAL);  // change depth function so depth test passes when values are equal to depth buffer's content
     shader.use();
+
+    float quadraticFactor = (float)(150-brPoena) * (150-brPoena) / (150*150);
+    float linearFactor = (float)(150-brPoena) / 150;
+
+    if(brPoena > 70){
+        if(randNum == 1){
+            quadraticFactor = 1.f;
+            linearFactor = 1.f;
+        }
+    }
+
+    glm::vec3 quadraticFactorVector = glm::vec3(quadraticFactor,quadraticFactor,quadraticFactor);
+    shader.setVec3("skyboxColor", quadraticFactorVector);
+
     glm::mat4 view = glm::mat4(glm::mat3(mainCamera.GetViewMatrix())); // remove translation from the view matrix
     shader.setMat4("view", view);
     glm::mat4 projection = glm::perspective(glm::radians(mainCamera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, Z_NEAR, Z_FAR);
@@ -116,8 +129,6 @@ void renderSkybox(ourShader shader,unsigned int VAOskybox,ourCamera mainCamera, 
 void renderPacman(std::pair<int,int> currPos,unsigned int VAO,ourShader shader,ourTexture pacmanTexture, ourCamera camera,
                   glm::vec3 pointLightPositions[],int numOfPointLights,int pacmanRotation){
 
-    float koef = (float)(150-brPoena) / 150;
-    koef = 0.9;
 
     glBindVertexArray(VAO);
     shader.use();
@@ -125,9 +136,9 @@ void renderPacman(std::pair<int,int> currPos,unsigned int VAO,ourShader shader,o
     shader.setVec3("viewPos", camera.Position);
     shader.setFloat("material.shininess", 32.0f);
 
-    glm::vec3 ambient = glm::vec3(0.05f * koef, 0.05f* koef, 0.05f * koef);
-    glm::vec3 diffuse = glm::vec3(0.8f * koef, 0.8f * koef, 0.8f * koef);
-    glm::vec3 specular = glm::vec3(0.5f * koef, 0.5f * koef, 0.5f * koef);
+    glm::vec3 ambient = glm::vec3(0.04f );
+    glm::vec3 diffuse = glm::vec3(0.7f);
+    glm::vec3 specular = glm::vec3(0.2f);
     float constant = 1.f;
     float linear = 0.09f;
     float quadratic = 0.032f;
@@ -142,8 +153,8 @@ void renderPacman(std::pair<int,int> currPos,unsigned int VAO,ourShader shader,o
     //setting direction light
     shader.setVec3("dirLight.direction", 0.0f, 0.0f, -1.f);
     shader.setVec3("dirLight.ambient", 0.05f, 0.05f, 0.05f);
-    shader.setVec3("dirLight.diffuse", 0.5f * koef, 0.5f * koef, 0.5f * koef);
-    shader.setVec3("dirLight.specular", 0.5f * koef, 0.5f * koef, 0.5f * koef);
+    shader.setVec3("dirLight.diffuse", 0.5f , 0.5f , 0.5f);
+    shader.setVec3("dirLight.specular", 0.5f , 0.5f, 0.5f );
 
 
     glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, Z_NEAR, Z_FAR);
@@ -179,13 +190,13 @@ void renderMap(int i,int j,int type,unsigned int VAO,ourShader shader, std::vect
     if(type == 0) return;
 
 
-    float koef = (float)(150-brPoena) * (150-brPoena) / (150*150);
-    float koef2 = (float)(150-brPoena) / 150;
+    float quadraticFactor = (float)(150-brPoena) * (150-brPoena) / (150*150);
+    float linearFactor = (float)(150-brPoena) / 150;
 
     if(brPoena > 70){
         if(randNum == 1){
-            koef = 1.f;
-            koef2 = 1.f;
+            quadraticFactor = 1.f;
+            linearFactor = 1.f;
         }
     }
 
@@ -200,9 +211,9 @@ void renderMap(int i,int j,int type,unsigned int VAO,ourShader shader, std::vect
 
 
     //setting point light
-    glm::vec3 ambient = glm::vec3(0.05f * koef2, 0.05f * koef2, 0.05f * koef2);
-    glm::vec3 diffuse = glm::vec3(0.4f * koef2, 0.4f * koef2, 0.4f * koef2);
-    glm::vec3 specular = glm::vec3(0.4f * koef2, 0.4f * koef2, 0.4f * koef2);
+    glm::vec3 ambient = glm::vec3(0.05f * linearFactor, 0.05f * linearFactor, 0.05f * linearFactor);
+    glm::vec3 diffuse = glm::vec3(0.4f * linearFactor, 0.4f * linearFactor, 0.4f * linearFactor);
+    glm::vec3 specular = glm::vec3(0.4f * linearFactor, 0.4f * linearFactor, 0.4f * linearFactor);
     float constant = 1.0f;
     float linear = 0.09f;
     float quadratic = 0.032f;
@@ -214,8 +225,8 @@ void renderMap(int i,int j,int type,unsigned int VAO,ourShader shader, std::vect
     //setting direction light
     shader.setVec3("dirLight.direction", 0.0f, 0.0f, -1.f);
     shader.setVec3("dirLight.ambient", 0.08f, 0.08f, 0.08f);
-    shader.setVec3("dirLight.diffuse", 0.2f * koef, 0.2f * koef, 0.2f * koef);
-    shader.setVec3("dirLight.specular", 0.2f * koef, 0.2f * koef, 0.2f * koef);
+    shader.setVec3("dirLight.diffuse", 0.2f * quadraticFactor, 0.2f * quadraticFactor, 0.2f * quadraticFactor);
+    shader.setVec3("dirLight.specular", 0.2f * quadraticFactor, 0.2f * quadraticFactor, 0.2f * quadraticFactor);
 
 
     glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, Z_NEAR, Z_FAR);
@@ -289,15 +300,17 @@ void renderLightCube(unsigned int VAO, ourShader shader,ourCamera camera, glm::v
 
 }
 
+
 void renderModel(Model nasModel, Shader modelShader, ourCamera kamera, glm::vec3 position) {
 
-    float koef = (float)(150-brPoena) * (150-brPoena) / (22500);
-    float koef2 = (float)(150-brPoena) / 150;
+    float quadraticFactor = (float)(150-brPoena) * (150-brPoena) / (22500);
+    float linearFactor = (float)(150-brPoena) / 150;
+
 
     if(brPoena > 70){
         if(randNum == 1){
-            koef = 1.f;
-            koef2 = 1.f;
+            quadraticFactor = 1.f;
+            linearFactor = 1.f;
         }
     }
 
@@ -310,9 +323,9 @@ void renderModel(Model nasModel, Shader modelShader, ourCamera kamera, glm::vec3
 
     modelShader.setVec3("viewPos", kamera.Position);
     modelShader.setVec3("dirLight.direction", 0.0f, 0.0f, -1.f);
-    modelShader.setVec3("dirLight.ambient", 0.25*koef2 + 0.05f, 0.25f*koef2 + 0.05f, 0.25f*koef2 + 0.05f);
-    modelShader.setVec3("dirLight.diffuse", 1.0f * koef2 + 0.4f, 1.0f *koef2 + 0.4f, 1.0f*koef2 + 0.4f);
-    modelShader.setVec3("dirLight.specular", 0.5f * koef2 + 0.1f, 0.5f * koef2 + 0.1f, 0.5f*koef2+ 0.1f);
+    modelShader.setVec3("dirLight.ambient", 0.25*linearFactor + 0.05f, 0.25f*linearFactor + 0.05f, 0.25f*linearFactor + 0.05f);
+    modelShader.setVec3("dirLight.diffuse", 1.0f * linearFactor + 0.4f, 1.0f *linearFactor + 0.4f, 1.0f*linearFactor + 0.4f);
+    modelShader.setVec3("dirLight.specular", 0.5f * linearFactor + 0.1f, 0.5f * linearFactor + 0.1f, 0.5f*linearFactor+ 0.1f);
 
 // render the loaded model
     glm::mat4 model = glm::mat4(1.0f);
