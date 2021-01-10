@@ -45,9 +45,12 @@ float deltaTime = 0.0f;	// time between current frame and last frame
 float lastFrame = 0.0f;
 
 ourCamera mainCamera(glm::vec3(10.0f, -10.0f, 22.0f));
+
 float lastX = SCR_WIDTH / 2.0f;
 float lastY = SCR_HEIGHT /  2.0f;
 bool firstMouse = true;
+
+int randNum;
 int brPoena = 0;
 
 std::pair<int,int> currPos;
@@ -76,10 +79,13 @@ int main(){
     std::vector<ourTexture> textures = loadTextures();
     std::vector<ourTexture> ghostTextures = loadGhostTextures();
 
-    stbi_set_flip_vertically_on_load(false);
     unsigned int skyboxTexture = loadCubemap();
-    stbi_set_flip_vertically_on_load(true);
 
+
+    unsigned int VAO = initBuffers();
+    unsigned int VAO2 = initEBOBuffers();
+    unsigned int VAOfig = initFIGBuffers();
+    unsigned int VAOskybox = initSKYBOXBuffers();
 
     ourShader mapShader("resources/shaders/cubeShader.vs",
                         "resources/shaders/cubeShader.fs");
@@ -92,10 +98,7 @@ int main(){
     ourShader skyboxShader("resources/shaders/skyboxShader.vs",
                            "resources/shaders/skyboxShader.fs");
 
-    unsigned int VAO = initBuffers();
-    unsigned int VAO2 = initEBOBuffers();
-    unsigned int VAOfig = initFIGBuffers();
-    unsigned int VAOskybox = initSKYBOXBuffers();
+
 
     glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -113,6 +116,7 @@ int main(){
             glm::vec3(16.f,-8.f,1.f),
             glm::vec3(16.f,-10.f,1.f),
     };
+
     int numOfPointLights = 0;
     for(auto &i : pointLightPositions){
         numOfPointLights++;
@@ -130,6 +134,7 @@ int main(){
 
     while (!glfwWindowShouldClose(window))
     {
+
         // input
         // -----
         float currentFrame = glfwGetTime();
@@ -139,15 +144,12 @@ int main(){
         processInput(window);
         mainCamera.keyboardInput(window, deltaTime);
 
-        //ako skupimo sve poene vracamo se na pocetak
         if(endGame){
             newGame();
         }
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-
-        glDepthFunc(GL_LEQUAL);
+        randNum = rand() % 15;
 
         for(int i = 0; i < n; i++){
             for(int j = 0; j < m; j++){
@@ -243,9 +245,9 @@ void pm_key_callback(GLFWwindow *window, int key, int scancode, int action, int 
 
     if(key == GLFW_KEY_UP  && action == GLFW_PRESS ){
         if(isAllowedMove(outMatrix, i - 1, j)){
-            if(outMatrix[i - 1][j] == 2)
+            if(outMatrix[i - 1][j] == FOOD_BOX)
                 brPoena++;
-            outMatrix[i][j] = 7;
+            outMatrix[i][j] = NO_BOX;
             currPos = std::make_pair(i-1,j);
             pacmanRotation = 1;
             moved = true;
@@ -267,7 +269,7 @@ void pm_key_callback(GLFWwindow *window, int key, int scancode, int action, int 
     else if(key == GLFW_KEY_LEFT  && action == GLFW_PRESS){
         if(i == 9 && j == 0){
             currPos = std::make_pair(9,20);
-            outMatrix[i][j] = 7;
+            outMatrix[i][j] = NO_BOX;
             pacmanRotation = 2;
             ind = true;
         }
@@ -353,6 +355,8 @@ void isEndGame(){
 void restartPositions(){
     currPos = std::make_pair(15,10);
 
+
+    //TODO  sredi
     std::pair<int,int> par0 = std::make_pair(8, 10);
     std::pair<int,int> par1 = std::make_pair(9, 9);
     std::pair<int,int> par2 = std::make_pair(9, 10);

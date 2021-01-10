@@ -70,6 +70,7 @@ unsigned int initSKYBOXBuffers(){
 
 unsigned int initFIGBuffers(){
     float vertices[] = {
+            //POSITION            NORMALS           TEXCORD
             -0.5f, -0.5f, 0.2f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f,
             0.5f, -0.5f, 0.2f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f,
             0.5f, 0.5f, 0.2f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f,

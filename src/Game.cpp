@@ -17,8 +17,11 @@
 #define FLOOR_BOX 9
 #define FLOOR_SPECULAR 10
 #define NO_SPECULAR 9
+#define Z_NEAR 0.1f
+#define Z_FAR 500.f
 
 extern int brPoena;
+extern int randNum;
 
 
 void renderGhost(int i, ourShader shader,unsigned int VAO, std::vector<std::pair<int,int>> ghostPos, ourCamera camera,
@@ -26,6 +29,13 @@ void renderGhost(int i, ourShader shader,unsigned int VAO, std::vector<std::pair
 
     float koef = (float)(150-brPoena) * (150-brPoena) / (22500);
     float koef2 = (float)(150-brPoena) / 150;
+
+    if(brPoena > 70){
+        if(randNum == 1){
+            koef = 1.f;
+            koef2 = 1.f;
+        }
+    }
 
 
     glBindVertexArray(VAO);
@@ -38,12 +48,9 @@ void renderGhost(int i, ourShader shader,unsigned int VAO, std::vector<std::pair
     glm::vec3 diffuse = glm::vec3(0.4f * koef2 + 0.2, 0.4f * koef2 + 0.2, 0.4f * koef2 + 0.2);
     glm::vec3 specular = glm::vec3(0.2f * koef2, 0.2f * koef2, 0.2f * koef2);
 
-//    ambient = glm::vec3(0.05f , 0.05f, 0.05f );
-//    diffuse = glm::vec3(0.4f , 0.4f , 0.4f );
-//    specular = glm::vec3(0.2f , 0.2f , 0.2f );
     float constant = 1.0f;
     float linear = 0.09f;
-    float quadratic = 0.32f;
+    float quadratic = 0.30f;
 
     //setting point light TODO foreach petlja
     for(int i = 0; i < numOfPointLights; i++) {
@@ -57,7 +64,7 @@ void renderGhost(int i, ourShader shader,unsigned int VAO, std::vector<std::pair
     shader.setVec3("dirLight.specular", 0.2f*koef, 0.2f*koef, 0.2f*koef);
 
 
-    glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+    glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, Z_NEAR, Z_FAR);
     shader.setMat4("projection", projection);
 
     glm::mat4 view = camera.GetViewMatrix();
@@ -86,11 +93,12 @@ void renderGhost(int i, ourShader shader,unsigned int VAO, std::vector<std::pair
 void renderSkybox(ourShader shader,unsigned int VAOskybox,ourCamera mainCamera, unsigned int skyboxTexture){
 
 
+
     glDepthFunc(GL_LEQUAL);  // change depth function so depth test passes when values are equal to depth buffer's content
     shader.use();
     glm::mat4 view = glm::mat4(glm::mat3(mainCamera.GetViewMatrix())); // remove translation from the view matrix
     shader.setMat4("view", view);
-    glm::mat4 projection = glm::perspective(glm::radians(mainCamera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+    glm::mat4 projection = glm::perspective(glm::radians(mainCamera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, Z_NEAR, Z_FAR);
     shader.setMat4("projection", projection);
 
     glBindVertexArray(VAOskybox);
@@ -127,18 +135,18 @@ void renderPacman(std::pair<int,int> currPos,unsigned int VAO,ourShader shader,o
     diffuse = glm::vec3(0.f);
     specular = glm::vec3(0.f);
 
-    //setting point light TODO foreach petlja
     for(int i = 0; i < numOfPointLights; i++) {
         setPointLight(shader, ambient, diffuse, specular, constant, linear, quadratic, pointLightPositions[i], i);
     }
+
     //setting direction light
     shader.setVec3("dirLight.direction", 0.0f, 0.0f, -1.f);
     shader.setVec3("dirLight.ambient", 0.05f, 0.05f, 0.05f);
-    shader.setVec3("dirLight.diffuse", 0.5 * koef, 0.5f * koef, 0.5f * koef);
+    shader.setVec3("dirLight.diffuse", 0.5f * koef, 0.5f * koef, 0.5f * koef);
     shader.setVec3("dirLight.specular", 0.5f * koef, 0.5f * koef, 0.5f * koef);
 
 
-    glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+    glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, Z_NEAR, Z_FAR);
     shader.setMat4("projection", projection);
 
     glm::mat4 view = camera.GetViewMatrix();
@@ -170,8 +178,17 @@ void renderMap(int i,int j,int type,unsigned int VAO,ourShader shader, std::vect
 
     if(type == 0) return;
 
+
     float koef = (float)(150-brPoena) * (150-brPoena) / (150*150);
     float koef2 = (float)(150-brPoena) / 150;
+
+    if(brPoena > 70){
+        if(randNum == 1){
+            koef = 1.f;
+            koef2 = 1.f;
+        }
+    }
+
 
 
 
@@ -181,13 +198,14 @@ void renderMap(int i,int j,int type,unsigned int VAO,ourShader shader, std::vect
     shader.setVec3("viewPos", camera.Position);
     shader.setFloat("material.shininess", 32.0f);
 
+
+    //setting point light
     glm::vec3 ambient = glm::vec3(0.05f * koef2, 0.05f * koef2, 0.05f * koef2);
     glm::vec3 diffuse = glm::vec3(0.4f * koef2, 0.4f * koef2, 0.4f * koef2);
     glm::vec3 specular = glm::vec3(0.4f * koef2, 0.4f * koef2, 0.4f * koef2);
     float constant = 1.0f;
     float linear = 0.09f;
     float quadratic = 0.032f;
-
 
     for(int i = 0; i < numOfPointLights; i++) {
         setPointLight(shader, ambient, diffuse, specular, constant, linear, quadratic, pointLightPositions[i], i);
@@ -200,7 +218,7 @@ void renderMap(int i,int j,int type,unsigned int VAO,ourShader shader, std::vect
     shader.setVec3("dirLight.specular", 0.2f * koef, 0.2f * koef, 0.2f * koef);
 
 
-    glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+    glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, Z_NEAR, Z_FAR);
     shader.setMat4("projection", projection);
 
     glm::mat4 view = camera.GetViewMatrix();
@@ -222,13 +240,12 @@ void renderMap(int i,int j,int type,unsigned int VAO,ourShader shader, std::vect
     shader.setMat4("model", model);
 
     shader.use();
-    teksture[type].activateTexture(type);
-    teksture[NO_SPECULAR].activateTexture(NO_SPECULAR);
+    teksture[type].activateTexture(0);
+    teksture[NO_SPECULAR].activateTexture(1);
 
-    shader.setInt("material.diffuse", type);
-    shader.setInt("material.specular", NO_SPECULAR);
+    shader.setInt("material.diffuse", 0);
+    shader.setInt("material.specular", 1);
 
-    glBindVertexArray(VAO);
 
     shader.use();
 
@@ -241,10 +258,10 @@ void renderMap(int i,int j,int type,unsigned int VAO,ourShader shader, std::vect
     model = glm::translate(model, glm::vec3((float)(i),(float)(-j), -1.0));
     shader.setMat4("model", model);
 
-    teksture[FLOOR_BOX].activateTexture(FLOOR_BOX);
-    teksture[FLOOR_SPECULAR].activateTexture(FLOOR_SPECULAR);
-    shader.setInt("material.diffuse", FLOOR_BOX);
-    shader.setInt("material.specular", FLOOR_SPECULAR);
+    teksture[FLOOR_BOX].activateTexture(0);
+    teksture[FLOOR_SPECULAR].activateTexture(1);
+    shader.setInt("material.diffuse", 0);
+    shader.setInt("material.specular", 1);
 
     glDrawArrays(GL_TRIANGLES,0,36);
 
@@ -254,7 +271,7 @@ void renderLightCube(unsigned int VAO, ourShader shader,ourCamera camera, glm::v
 
     shader.use();
 
-    glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+    glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, Z_NEAR, Z_FAR);
     shader.setMat4("projection", projection);
 
     glm::mat4 view = camera.GetViewMatrix();
@@ -277,9 +294,15 @@ void renderModel(Model nasModel, Shader modelShader, ourCamera kamera, glm::vec3
     float koef = (float)(150-brPoena) * (150-brPoena) / (22500);
     float koef2 = (float)(150-brPoena) / 150;
 
+    if(brPoena > 70){
+        if(randNum == 1){
+            koef = 1.f;
+            koef2 = 1.f;
+        }
+    }
 
     modelShader.use();
-    glm::mat4 projection = glm::perspective(glm::radians(kamera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+    glm::mat4 projection = glm::perspective(glm::radians(kamera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, Z_NEAR,Z_FAR);
     glm::mat4 view = kamera.GetViewMatrix();
     modelShader.setMat4("projection", projection);
     modelShader.setMat4("view", view);

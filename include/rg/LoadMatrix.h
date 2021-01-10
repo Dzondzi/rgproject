@@ -30,9 +30,9 @@ public:
            std::cerr << "n or m < 1 \n";
            exit(EXIT_FAILURE);
         }
-        std::cerr << n << " " << m;
+
         std::vector<unsigned int> pom(m);
-        int x;
+
         for(int j = 0; j < n; j++) {
             for (int i = 0; i < m; i++) {
                 myfile >> pom[i];

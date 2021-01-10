@@ -5,6 +5,9 @@
 #include <rg/LoadTextures.h>
 
 unsigned int loadCubemap(){
+
+    stbi_set_flip_vertically_on_load(false);
+
     std::vector<std::string> faces = {
             "resources/textures/skybox2/posx.jpg",
             "resources/textures/skybox2/negx.jpg",
@@ -37,6 +40,8 @@ unsigned int loadCubemap(){
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+
+    stbi_set_flip_vertically_on_load(true);
 
     return texID;
 }
