@@ -20,31 +20,41 @@
 
 extern int brPoena;
 
+
 void renderGhost(int i, ourShader shader,unsigned int VAO, std::vector<std::pair<int,int>> ghostPos, ourCamera camera,
                  glm::vec3 pointLightPositions[], int numOfPointLights, std::vector<ourTexture> ghostTextures){
+
+    float koef = (float)(150-brPoena) * (150-brPoena) / (22500);
+    float koef2 = (float)(150-brPoena) / 150;
+
 
     glBindVertexArray(VAO);
     shader.use();
 
     shader.setVec3("viewPos", camera.Position);
-    shader.setFloat("material.shininess", 32.0f);
+    shader.setFloat("material.shininess", 16.0f);
 
-    glm::vec3 ambient = glm::vec3(0.05f, 0.05f, 0.05f);
-    glm::vec3 diffuse = glm::vec3(0.8f, 0.8f, 0.8f);
-    glm::vec3 specular = glm::vec3(0.5f, 0.5f, 0.5f);
-    float constant = 0.1f;
+    glm::vec3 ambient = glm::vec3(0.05f * koef2 , 0.05f* koef2 , 0.05f * koef2 );
+    glm::vec3 diffuse = glm::vec3(0.4f * koef2 + 0.2, 0.4f * koef2 + 0.2, 0.4f * koef2 + 0.2);
+    glm::vec3 specular = glm::vec3(0.2f * koef2, 0.2f * koef2, 0.2f * koef2);
+
+//    ambient = glm::vec3(0.05f , 0.05f, 0.05f );
+//    diffuse = glm::vec3(0.4f , 0.4f , 0.4f );
+//    specular = glm::vec3(0.2f , 0.2f , 0.2f );
+    float constant = 1.0f;
     float linear = 0.09f;
-    float quadratic = 0.032f;
+    float quadratic = 0.32f;
 
     //setting point light TODO foreach petlja
     for(int i = 0; i < numOfPointLights; i++) {
         setPointLight(shader, ambient, diffuse, specular, constant, linear, quadratic, pointLightPositions[i], i);
     }
+
     //setting direction light
     shader.setVec3("dirLight.direction", 0.0f, 0.0f, -1.f);
-    shader.setVec3("dirLight.ambient", 0.05f, 0.05f, 0.05f);
-    shader.setVec3("dirLight.diffuse", 0.5f, 0.5f, 0.5f);
-    shader.setVec3("dirLight.specular", 0.5f, 0.5f, 0.5f);
+    shader.setVec3("dirLight.ambient", 0.02f * koef, 0.02f * koef, 0.02f * koef);
+    shader.setVec3("dirLight.diffuse", 0.2f * koef, 0.2f * koef, 0.2f*koef);
+    shader.setVec3("dirLight.specular", 0.2f*koef, 0.2f*koef, 0.2f*koef);
 
 
     glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
@@ -98,18 +108,24 @@ void renderSkybox(ourShader shader,unsigned int VAOskybox,ourCamera mainCamera, 
 void renderPacman(std::pair<int,int> currPos,unsigned int VAO,ourShader shader,ourTexture pacmanTexture, ourCamera camera,
                   glm::vec3 pointLightPositions[],int numOfPointLights,int pacmanRotation){
 
+    float koef = (float)(150-brPoena) / 150;
+    koef = 0.9;
+
     glBindVertexArray(VAO);
     shader.use();
 
     shader.setVec3("viewPos", camera.Position);
     shader.setFloat("material.shininess", 32.0f);
 
-    glm::vec3 ambient = glm::vec3(0.05f, 0.05f, 0.05f);
-    glm::vec3 diffuse = glm::vec3(0.8f, 0.8f, 0.8f);
-    glm::vec3 specular = glm::vec3(0.5f, 0.5f, 0.5f);
-    float constant = 0.1f;
+    glm::vec3 ambient = glm::vec3(0.05f * koef, 0.05f* koef, 0.05f * koef);
+    glm::vec3 diffuse = glm::vec3(0.8f * koef, 0.8f * koef, 0.8f * koef);
+    glm::vec3 specular = glm::vec3(0.5f * koef, 0.5f * koef, 0.5f * koef);
+    float constant = 1.f;
     float linear = 0.09f;
     float quadratic = 0.032f;
+    ambient = glm::vec3(0.f);
+    diffuse = glm::vec3(0.f);
+    specular = glm::vec3(0.f);
 
     //setting point light TODO foreach petlja
     for(int i = 0; i < numOfPointLights; i++) {
@@ -118,8 +134,8 @@ void renderPacman(std::pair<int,int> currPos,unsigned int VAO,ourShader shader,o
     //setting direction light
     shader.setVec3("dirLight.direction", 0.0f, 0.0f, -1.f);
     shader.setVec3("dirLight.ambient", 0.05f, 0.05f, 0.05f);
-    shader.setVec3("dirLight.diffuse", 0.5f, 0.5f, 0.5f);
-    shader.setVec3("dirLight.specular", 0.5f, 0.5f, 0.5f);
+    shader.setVec3("dirLight.diffuse", 0.5 * koef, 0.5f * koef, 0.5f * koef);
+    shader.setVec3("dirLight.specular", 0.5f * koef, 0.5f * koef, 0.5f * koef);
 
 
     glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
@@ -146,6 +162,7 @@ void renderPacman(std::pair<int,int> currPos,unsigned int VAO,ourShader shader,o
     glBindVertexArray(VAO);
     glDrawArrays(GL_TRIANGLES,0,6);
 
+
 }
 
 void renderMap(int i,int j,int type,unsigned int VAO,ourShader shader, std::vector<ourTexture> teksture,
@@ -153,29 +170,34 @@ void renderMap(int i,int j,int type,unsigned int VAO,ourShader shader, std::vect
 
     if(type == 0) return;
 
+    float koef = (float)(150-brPoena) * (150-brPoena) / (150*150);
+    float koef2 = (float)(150-brPoena) / 150;
+
+
+
     glm::vec3 scalingVector = glm::vec3(1.f);
 
     shader.use();
     shader.setVec3("viewPos", camera.Position);
     shader.setFloat("material.shininess", 32.0f);
 
-    glm::vec3 ambient = glm::vec3(0.05f, 0.05f, 0.05f);
-    glm::vec3 diffuse = glm::vec3(0.8f, 0.8f, 0.8f);
-    glm::vec3 specular = glm::vec3(0.5f, 0.5f, 0.5f);
-    float constant = 0.1f;
+    glm::vec3 ambient = glm::vec3(0.05f * koef2, 0.05f * koef2, 0.05f * koef2);
+    glm::vec3 diffuse = glm::vec3(0.4f * koef2, 0.4f * koef2, 0.4f * koef2);
+    glm::vec3 specular = glm::vec3(0.4f * koef2, 0.4f * koef2, 0.4f * koef2);
+    float constant = 1.0f;
     float linear = 0.09f;
     float quadratic = 0.032f;
 
-    //setting point light TODO foreach petlja
+
     for(int i = 0; i < numOfPointLights; i++) {
         setPointLight(shader, ambient, diffuse, specular, constant, linear, quadratic, pointLightPositions[i], i);
     }
 
     //setting direction light
     shader.setVec3("dirLight.direction", 0.0f, 0.0f, -1.f);
-    shader.setVec3("dirLight.ambient", 0.05f, 0.05f, 0.05f);
-    shader.setVec3("dirLight.diffuse", 0.5f, 0.5f, 0.5f);
-    shader.setVec3("dirLight.specular", 0.5f, 0.5f, 0.5f);
+    shader.setVec3("dirLight.ambient", 0.08f, 0.08f, 0.08f);
+    shader.setVec3("dirLight.diffuse", 0.2f * koef, 0.2f * koef, 0.2f * koef);
+    shader.setVec3("dirLight.specular", 0.2f * koef, 0.2f * koef, 0.2f * koef);
 
 
     glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
@@ -185,6 +207,8 @@ void renderMap(int i,int j,int type,unsigned int VAO,ourShader shader, std::vect
     shader.setMat4("view", view);
 
     if(type == FOOD_BOX){
+        //OSTAVI OSVETLJENJE ZA FOOD BOX
+        shader.setVec3("dirLight.ambient", 0.2f, 0.2f, 0.2f);
         scalingVector*=0.2;
     }
     //trik koji cini da gornja kocka nestane TODO srediti naci bolje resenje
@@ -224,8 +248,6 @@ void renderMap(int i,int j,int type,unsigned int VAO,ourShader shader, std::vect
 
     glDrawArrays(GL_TRIANGLES,0,36);
 
-
-
 }
 
 void renderLightCube(unsigned int VAO, ourShader shader,ourCamera camera, glm::vec3 pointLightPosition){
@@ -252,37 +274,43 @@ void renderLightCube(unsigned int VAO, ourShader shader,ourCamera camera, glm::v
 
 void renderModel(Model nasModel, Shader modelShader, ourCamera kamera, glm::vec3 position) {
 
-        modelShader.use();
-        glm::mat4 projection = glm::perspective(glm::radians(kamera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
-        glm::mat4 view = kamera.GetViewMatrix();
-        modelShader.setMat4("projection", projection);
-        modelShader.setMat4("view", view);
+    float koef = (float)(150-brPoena) * (150-brPoena) / (22500);
+    float koef2 = (float)(150-brPoena) / 150;
 
 
-        modelShader.setVec3("viewPos", kamera.Position);
-        modelShader.setVec3("dirLight.direction", 0.0f, 0.0f, -1.f);
-        modelShader.setVec3("dirLight.ambient", 0.25f, 0.25f, 0.25f);
-        modelShader.setVec3("dirLight.diffuse", 1.4f, 1.4f, 1.4f);
-        modelShader.setVec3("dirLight.specular", 0.5f, 0.5f, 0.5f);
+    modelShader.use();
+    glm::mat4 projection = glm::perspective(glm::radians(kamera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+    glm::mat4 view = kamera.GetViewMatrix();
+    modelShader.setMat4("projection", projection);
+    modelShader.setMat4("view", view);
 
-    // render the loaded model
-        glm::mat4 model = glm::mat4(1.0f);
-        model = glm::translate(model, position); // translate it down so it's at the center of the scene
-        model = glm::scale(model, glm::vec3(0.15));	// it's a bit too big for our scene, so scale it down
-        modelShader.setMat4("model", model);
-        nasModel.Draw(modelShader);
+
+    modelShader.setVec3("viewPos", kamera.Position);
+    modelShader.setVec3("dirLight.direction", 0.0f, 0.0f, -1.f);
+    modelShader.setVec3("dirLight.ambient", 0.25*koef2 + 0.05f, 0.25f*koef2 + 0.05f, 0.25f*koef2 + 0.05f);
+    modelShader.setVec3("dirLight.diffuse", 1.0f * koef2 + 0.4f, 1.0f *koef2 + 0.4f, 1.0f*koef2 + 0.4f);
+    modelShader.setVec3("dirLight.specular", 0.5f * koef2 + 0.1f, 0.5f * koef2 + 0.1f, 0.5f*koef2+ 0.1f);
+
+// render the loaded model
+    glm::mat4 model = glm::mat4(1.0f);
+    model = glm::translate(model, position); // translate it down so it's at the center of the scene
+    model = glm::scale(model, glm::vec3(0.15));	// it's a bit too big for our scene, so scale it down
+    modelShader.setMat4("model", model);
+    nasModel.Draw(modelShader);
+
 }
 
 void setPointLight(ourShader shader, glm::vec3 ambient,glm::vec3 diffuse,glm::vec3 specular,
                    float constant,float linear,float quadratic,glm::vec3 pointLightPosition,int num){
-        shader.use();
-        std::string name = "pointLights[" + std::to_string(num) + "].";
-        shader.setVec3(name+"position", pointLightPosition);
-        shader.setVec3(name+"ambient",ambient);
-        shader.setVec3(name+"diffuse", diffuse);
-        shader.setVec3(name+"specular", specular);
-        shader.setFloat(name+"constant", constant);
-        shader.setFloat(name+"linear", linear);
-        shader.setFloat(name+"quadratic", quadratic);
+
+    shader.use();
+    std::string name = "pointLights[" + std::to_string(num) + "].";
+    shader.setVec3(name+"position", pointLightPosition);
+    shader.setVec3(name+"ambient",ambient);
+    shader.setVec3(name+"diffuse", diffuse);
+    shader.setVec3(name+"specular", specular);
+    shader.setFloat(name+"constant", constant);
+    shader.setFloat(name+"linear", linear);
+    shader.setFloat(name+"quadratic", quadratic);
 
 }

@@ -6,7 +6,8 @@ out vec3 TexCoord;
 uniform mat4 projection;
 uniform mat4 view;
 
-void main(){
+void main()
+{
     TexCoord = aPos;
     vec4 pos = projection * view * vec4(aPos, 1.0);
     gl_Position = pos.xyww;

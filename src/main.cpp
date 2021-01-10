@@ -111,8 +111,7 @@ int main(){
             glm::vec3(4.f,-8.f,1.f),
             glm::vec3(4.f,-10.f,1.f),
             glm::vec3(16.f,-8.f,1.f),
-            glm::vec3(16.f,-10.f,1.f)
-
+            glm::vec3(16.f,-10.f,1.f),
     };
     int numOfPointLights = 0;
     for(auto &i : pointLightPositions){
@@ -147,8 +146,8 @@ int main(){
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        renderSkybox(skyboxShader, VAOskybox, mainCamera, skyboxTexture);
 
+        glDepthFunc(GL_LEQUAL);
 
         for(int i = 0; i < n; i++){
             for(int j = 0; j < m; j++){
@@ -170,7 +169,7 @@ int main(){
             renderModel(outModel, modelShader, mainCamera, pointLightPosition);
         }
 
-     //   renderSkybox(skyboxShader, VAOskybox, mainCamera, skyboxTexture);
+        renderSkybox(skyboxShader, VAOskybox, mainCamera, skyboxTexture);
 
 
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
@@ -237,6 +236,10 @@ void pm_key_callback(GLFWwindow *window, int key, int scancode, int action, int 
 
     bool moved = false;
     bool ind = false;
+
+    if(key == GLFW_KEY_I  && action == GLFW_PRESS ){
+        brPoena = 149;
+    }
 
     if(key == GLFW_KEY_UP  && action == GLFW_PRESS ){
         if(isAllowedMove(outMatrix, i - 1, j)){
