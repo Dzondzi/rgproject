@@ -8,6 +8,7 @@
 #include <rg/ourTexture.h>
 #include <vector>
 
+unsigned int loadCubemap();
 std::vector<ourTexture> loadGhostTextures();
 std::vector<ourTexture> loadTextures();
 

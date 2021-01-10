@@ -16,6 +16,7 @@
 #include <rg/ourTexture.h>
 #include <rg/ourCamera.h>
 
+void renderSkybox(ourShader shader,unsigned int VAOskybox,ourCamera mainCamera,unsigned int skyboxTexture);
 
 void renderMap(int i,int j,int type,unsigned int VAO,ourShader mapShader, std::vector<ourTexture> teksture,
                ourCamera camera, glm::vec3 pointLightPositions[],int numOfPointLights);

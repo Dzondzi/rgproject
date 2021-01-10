@@ -57,7 +57,7 @@ std::vector<std::pair<int,int>> ghostPos(4);
 bool endGame = false;
 int pacmanRotation;
 
-std::vector<int> lastDirGhost(4, -1);
+std::vector<int> lastDirGhost = {1, 0, 1, 3};
 int lastBox = 7;
 
 
@@ -76,17 +76,26 @@ int main(){
     std::vector<ourTexture> textures = loadTextures();
     std::vector<ourTexture> ghostTextures = loadGhostTextures();
 
+    stbi_set_flip_vertically_on_load(false);
+    unsigned int skyboxTexture = loadCubemap();
+    stbi_set_flip_vertically_on_load(true);
 
-    ourShader mapShader("resources/shaders/cubeShader.vs", "resources/shaders/cubeShader.fs");
-    ourShader ghostShader("resources/shaders/pacmanShader.vs", "resources/shaders/pacmanShader.fs");
 
-    ourShader pacmanShader("resources/shaders/pacmanShader.vs", "resources/shaders/pacmanShader.fs");
-
-    ourShader cubeShader("resources/shaders/lightCube.vs", "resources/shaders/lightCube.fs");
+    ourShader mapShader("resources/shaders/cubeShader.vs",
+                        "resources/shaders/cubeShader.fs");
+    ourShader ghostShader("resources/shaders/pacmanShader.vs",
+                          "resources/shaders/pacmanShader.fs");
+    ourShader pacmanShader("resources/shaders/pacmanShader.vs",
+                           "resources/shaders/pacmanShader.fs");
+    ourShader cubeShader("resources/shaders/lightcubeShader.vs",
+                         "resources/shaders/lightcubeShader.fs");
+    ourShader skyboxShader("resources/shaders/skyboxShader.vs",
+                           "resources/shaders/skyboxShader.fs");
 
     unsigned int VAO = initBuffers();
     unsigned int VAO2 = initEBOBuffers();
     unsigned int VAOfig = initFIGBuffers();
+    unsigned int VAOskybox = initSKYBOXBuffers();
 
     glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -112,10 +121,8 @@ int main(){
 
     pacmanRotation = 0;
     ourTexture pacmanTexture = textures[PACMAN];
-    textures[PACMAN].setWrappingST(GL_CLAMP_TO_EDGE, GL_CLAMP_TO_BORDER);
+    pacmanTexture.setWrappingST(GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
 
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
     Shader modelShader("modelShader.vs", "modelShader.fs");
     Model outModel("resources/objects/planet/planet.obj");
@@ -140,6 +147,9 @@ int main(){
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+        renderSkybox(skyboxShader, VAOskybox, mainCamera, skyboxTexture);
+
+
         for(int i = 0; i < n; i++){
             for(int j = 0; j < m; j++){
                 renderMap(i, j, outMatrix[j][i], VAO, mapShader, textures, mainCamera, pointLightPositions, numOfPointLights);
@@ -159,6 +169,8 @@ int main(){
         for(auto & pointLightPosition : pointLightPositions){
             renderModel(outModel, modelShader, mainCamera, pointLightPosition);
         }
+
+     //   renderSkybox(skyboxShader, VAOskybox, mainCamera, skyboxTexture);
 
 
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
@@ -357,7 +369,7 @@ void newGame(){
 
     brPoena = 0;
     pacmanRotation = 0;
-    lastDirGhost = {-1,-1,-1,-1};
+    lastDirGhost = {1,0,1,3};
 
     lastBox = NO_BOX;
     endGame = false;

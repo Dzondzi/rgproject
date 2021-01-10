@@ -4,6 +4,43 @@
 
 #include <rg/LoadTextures.h>
 
+unsigned int loadCubemap(){
+    std::vector<std::string> faces = {
+            "resources/textures/skybox2/posx.jpg",
+            "resources/textures/skybox2/negx.jpg",
+            "resources/textures/skybox2/posy.jpg",
+            "resources/textures/skybox2/negy.jpg",
+            "resources/textures/skybox2/posz.jpg",
+            "resources/textures/skybox2/negz.jpg"
+    };
+
+    unsigned int texID;
+    glGenTextures(1, &texID);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, texID);
+
+    int width, height, nrChannels;
+    for(int i = 0; i < faces.size(); i++){
+        unsigned char* data = stbi_load(faces[i].c_str(), &width, &height, &nrChannels, 0);
+        if(data){
+            glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i,
+                         0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+            stbi_image_free(data);
+        }
+        else{
+            std::cout << "cubemap tex " << faces[i] << " failed to load" << std::endl;
+            stbi_image_free(data);
+        }
+    }
+
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+
+    return texID;
+}
+
 std::vector<ourTexture> loadGhostTextures(){
     std::vector<ourTexture> teksture;
 
@@ -18,9 +55,6 @@ std::vector<ourTexture> loadGhostTextures(){
     teksture.push_back(tex2);
     teksture.push_back(tex3);
 
-    for(auto &tekstura : teksture){
-        tekstura.setWrappingST(GL_CLAMP_TO_BORDER, GL_CLAMP_TO_BORDER);
-    }
 
     return teksture;
 
@@ -41,6 +75,7 @@ std::vector<ourTexture> loadTextures(){
     ourTexture tex8("resources/textures/ghost4.png");
     ourTexture tex9("resources/textures/noSpecular.jpg");
     ourTexture tex10("resources/textures/stripes3.jpg");
+
 
 
     textures.push_back(tex0);

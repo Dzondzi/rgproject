@@ -18,6 +18,8 @@
 #define FLOOR_SPECULAR 10
 #define NO_SPECULAR 9
 
+extern int brPoena;
+
 void renderGhost(int i, ourShader shader,unsigned int VAO, std::vector<std::pair<int,int>> ghostPos, ourCamera camera,
                  glm::vec3 pointLightPositions[], int numOfPointLights, std::vector<ourTexture> ghostTextures){
 
@@ -70,6 +72,28 @@ void renderGhost(int i, ourShader shader,unsigned int VAO, std::vector<std::pair
 
 
 }
+
+void renderSkybox(ourShader shader,unsigned int VAOskybox,ourCamera mainCamera, unsigned int skyboxTexture){
+
+
+    glDepthFunc(GL_LEQUAL);  // change depth function so depth test passes when values are equal to depth buffer's content
+    shader.use();
+    glm::mat4 view = glm::mat4(glm::mat3(mainCamera.GetViewMatrix())); // remove translation from the view matrix
+    shader.setMat4("view", view);
+    glm::mat4 projection = glm::perspective(glm::radians(mainCamera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+    shader.setMat4("projection", projection);
+
+    glBindVertexArray(VAOskybox);
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, skyboxTexture);
+
+    glDrawArrays(GL_TRIANGLES, 0, 36);
+
+    glBindVertexArray(0);
+
+    glDepthFunc(GL_LESS);
+}
+
 
 void renderPacman(std::pair<int,int> currPos,unsigned int VAO,ourShader shader,ourTexture pacmanTexture, ourCamera camera,
                   glm::vec3 pointLightPositions[],int numOfPointLights,int pacmanRotation){
@@ -165,7 +189,7 @@ void renderMap(int i,int j,int type,unsigned int VAO,ourShader shader, std::vect
     }
     //trik koji cini da gornja kocka nestane TODO srediti naci bolje resenje
     if(type == NO_BOX){
-        scalingVector*=0.001f;
+        scalingVector*=0.0001f;
     }
 
     glm::mat4 model = glm::mat4(1.0f); // make sure to initialize matrix to identity matrix first
