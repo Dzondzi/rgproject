@@ -4,14 +4,14 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/dzondzi/Desktop/grafa/rgproject/src/Game.cpp" "/home/dzondzi/Desktop/grafa/rgproject/cmake-build-debug/CMakeFiles/project_base.dir/src/Game.cpp.o"
-  "/home/dzondzi/Desktop/grafa/rgproject/src/Gameplay.cpp" "/home/dzondzi/Desktop/grafa/rgproject/cmake-build-debug/CMakeFiles/project_base.dir/src/Gameplay.cpp.o"
-  "/home/dzondzi/Desktop/grafa/rgproject/src/InitBuffers.cpp" "/home/dzondzi/Desktop/grafa/rgproject/cmake-build-debug/CMakeFiles/project_base.dir/src/InitBuffers.cpp.o"
-  "/home/dzondzi/Desktop/grafa/rgproject/src/LoadTextures.cpp" "/home/dzondzi/Desktop/grafa/rgproject/cmake-build-debug/CMakeFiles/project_base.dir/src/LoadTextures.cpp.o"
-  "/home/dzondzi/Desktop/grafa/rgproject/src/MatrixChanges1.cpp" "/home/dzondzi/Desktop/grafa/rgproject/cmake-build-debug/CMakeFiles/project_base.dir/src/MatrixChanges1.cpp.o"
-  "/home/dzondzi/Desktop/grafa/rgproject/src/StartingCallbackInit.cpp" "/home/dzondzi/Desktop/grafa/rgproject/cmake-build-debug/CMakeFiles/project_base.dir/src/StartingCallbackInit.cpp.o"
-  "/home/dzondzi/Desktop/grafa/rgproject/src/StartingGlfwInit.cpp" "/home/dzondzi/Desktop/grafa/rgproject/cmake-build-debug/CMakeFiles/project_base.dir/src/StartingGlfwInit.cpp.o"
-  "/home/dzondzi/Desktop/grafa/rgproject/src/main.cpp" "/home/dzondzi/Desktop/grafa/rgproject/cmake-build-debug/CMakeFiles/project_base.dir/src/main.cpp.o"
+  "/home/marko/Desktop/pr/rgproject/src/Game.cpp" "/home/marko/Desktop/pr/rgproject/cmake-build-debug/CMakeFiles/project_base.dir/src/Game.cpp.o"
+  "/home/marko/Desktop/pr/rgproject/src/Gameplay.cpp" "/home/marko/Desktop/pr/rgproject/cmake-build-debug/CMakeFiles/project_base.dir/src/Gameplay.cpp.o"
+  "/home/marko/Desktop/pr/rgproject/src/InitBuffers.cpp" "/home/marko/Desktop/pr/rgproject/cmake-build-debug/CMakeFiles/project_base.dir/src/InitBuffers.cpp.o"
+  "/home/marko/Desktop/pr/rgproject/src/LoadTextures.cpp" "/home/marko/Desktop/pr/rgproject/cmake-build-debug/CMakeFiles/project_base.dir/src/LoadTextures.cpp.o"
+  "/home/marko/Desktop/pr/rgproject/src/MatrixChanges1.cpp" "/home/marko/Desktop/pr/rgproject/cmake-build-debug/CMakeFiles/project_base.dir/src/MatrixChanges1.cpp.o"
+  "/home/marko/Desktop/pr/rgproject/src/StartingCallbackInit.cpp" "/home/marko/Desktop/pr/rgproject/cmake-build-debug/CMakeFiles/project_base.dir/src/StartingCallbackInit.cpp.o"
+  "/home/marko/Desktop/pr/rgproject/src/StartingGlfwInit.cpp" "/home/marko/Desktop/pr/rgproject/cmake-build-debug/CMakeFiles/project_base.dir/src/StartingGlfwInit.cpp.o"
+  "/home/marko/Desktop/pr/rgproject/src/main.cpp" "/home/marko/Desktop/pr/rgproject/cmake-build-debug/CMakeFiles/project_base.dir/src/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -30,9 +30,9 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/home/dzondzi/Desktop/grafa/rgproject/cmake-build-debug/libs/glad/CMakeFiles/glad.dir/DependInfo.cmake"
-  "/home/dzondzi/Desktop/grafa/rgproject/cmake-build-debug/CMakeFiles/STB_IMAGE.dir/DependInfo.cmake"
-  "/home/dzondzi/Desktop/grafa/rgproject/cmake-build-debug/libs/imgui/CMakeFiles/imgui.dir/DependInfo.cmake"
+  "/home/marko/Desktop/pr/rgproject/cmake-build-debug/libs/glad/CMakeFiles/glad.dir/DependInfo.cmake"
+  "/home/marko/Desktop/pr/rgproject/cmake-build-debug/CMakeFiles/STB_IMAGE.dir/DependInfo.cmake"
+  "/home/marko/Desktop/pr/rgproject/cmake-build-debug/libs/imgui/CMakeFiles/imgui.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

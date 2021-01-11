@@ -1,4 +1,4 @@
-# Install script for directory: /home/dzondzi/Desktop/grafa/rgproject
+# Install script for directory: /home/marko/Desktop/pr/rgproject
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,8 +39,8 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/dzondzi/Desktop/grafa/rgproject/cmake-build-debug/libs/glad/cmake_install.cmake")
-  include("/home/dzondzi/Desktop/grafa/rgproject/cmake-build-debug/libs/imgui/cmake_install.cmake")
+  include("/home/marko/Desktop/pr/rgproject/cmake-build-debug/libs/glad/cmake_install.cmake")
+  include("/home/marko/Desktop/pr/rgproject/cmake-build-debug/libs/imgui/cmake_install.cmake")
 
 endif()
 
@@ -52,5 +52,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/dzondzi/Desktop/grafa/rgproject/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/marko/Desktop/pr/rgproject/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

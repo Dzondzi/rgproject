@@ -9,12 +9,12 @@ unsigned int loadCubemap(){
     stbi_set_flip_vertically_on_load(false);
 
     std::vector<std::string> faces = {
-            "resources/textures/skybox2/posx.jpg",
-            "resources/textures/skybox2/negx.jpg",
-            "resources/textures/skybox2/posy.jpg",
-            "resources/textures/skybox2/negy.jpg",
-            "resources/textures/skybox2/posz.jpg",
-            "resources/textures/skybox2/negz.jpg"
+            "resources/textures/skybox6/posx.jpg",
+            "resources/textures/skybox6/negx.jpg",
+            "resources/textures/skybox6/posy.jpg",
+            "resources/textures/skybox6/negy.jpg",
+            "resources/textures/skybox6/posz.jpg",
+            "resources/textures/skybox6/negz.jpg"
     };
 
     unsigned int texID;

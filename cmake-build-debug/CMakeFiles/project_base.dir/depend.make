@@ -18,6 +18,23 @@ CMakeFiles/project_base.dir/src/Game.cpp.o: ../libs/glad/include/glad/glad.h
 CMakeFiles/project_base.dir/src/Game.cpp.o: ../src/Game.cpp
 CMakeFiles/project_base.dir/src/Game.cpp.o: configuration/root_directory.h
 
+CMakeFiles/project_base.dir/src/Gameplay.cpp.o: ../include/learnopengl/filesystem.h
+CMakeFiles/project_base.dir/src/Gameplay.cpp.o: ../include/learnopengl/mesh.h
+CMakeFiles/project_base.dir/src/Gameplay.cpp.o: ../include/learnopengl/shader.h
+CMakeFiles/project_base.dir/src/Gameplay.cpp.o: ../include/rg/Game.h
+CMakeFiles/project_base.dir/src/Gameplay.cpp.o: ../include/rg/Gameplay.h
+CMakeFiles/project_base.dir/src/Gameplay.cpp.o: ../include/rg/LoadMatrix.h
+CMakeFiles/project_base.dir/src/Gameplay.cpp.o: ../include/rg/MatrixChanges1.h
+CMakeFiles/project_base.dir/src/Gameplay.cpp.o: ../include/rg/model.h
+CMakeFiles/project_base.dir/src/Gameplay.cpp.o: ../include/rg/ourCamera.h
+CMakeFiles/project_base.dir/src/Gameplay.cpp.o: ../include/rg/ourShader.h
+CMakeFiles/project_base.dir/src/Gameplay.cpp.o: ../include/rg/ourTexture.h
+CMakeFiles/project_base.dir/src/Gameplay.cpp.o: ../include/stb_image.h
+CMakeFiles/project_base.dir/src/Gameplay.cpp.o: ../libs/glad/include/KHR/khrplatform.h
+CMakeFiles/project_base.dir/src/Gameplay.cpp.o: ../libs/glad/include/glad/glad.h
+CMakeFiles/project_base.dir/src/Gameplay.cpp.o: ../src/Gameplay.cpp
+CMakeFiles/project_base.dir/src/Gameplay.cpp.o: configuration/root_directory.h
+
 CMakeFiles/project_base.dir/src/InitBuffers.cpp.o: ../include/rg/InitBuffers.h
 CMakeFiles/project_base.dir/src/InitBuffers.cpp.o: ../libs/glad/include/KHR/khrplatform.h
 CMakeFiles/project_base.dir/src/InitBuffers.cpp.o: ../libs/glad/include/glad/glad.h
@@ -58,6 +75,7 @@ CMakeFiles/project_base.dir/src/main.cpp.o: ../include/learnopengl/filesystem.h
 CMakeFiles/project_base.dir/src/main.cpp.o: ../include/learnopengl/mesh.h
 CMakeFiles/project_base.dir/src/main.cpp.o: ../include/learnopengl/shader.h
 CMakeFiles/project_base.dir/src/main.cpp.o: ../include/rg/Game.h
+CMakeFiles/project_base.dir/src/main.cpp.o: ../include/rg/Gameplay.h
 CMakeFiles/project_base.dir/src/main.cpp.o: ../include/rg/InitBuffers.h
 CMakeFiles/project_base.dir/src/main.cpp.o: ../include/rg/LoadMatrix.h
 CMakeFiles/project_base.dir/src/main.cpp.o: ../include/rg/LoadTextures.h
