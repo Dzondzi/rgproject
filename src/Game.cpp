@@ -92,7 +92,7 @@ void renderGhost(int i, ourShader shader,unsigned int VAO, std::vector<std::pair
 
 void renderSkybox(ourShader shader,unsigned int VAOskybox,ourCamera mainCamera, unsigned int skyboxTexture){
 
-    glDepthFunc(GL_EQUAL);  // change depth function so depth test passes when values are equal to depth buffer's content
+    glDepthFunc(GL_LEQUAL);  // change depth function so depth test passes when values are equal to depth buffer's content
     shader.use();
 
     float quadraticFactor = (float)(150-brPoena) * (150-brPoena) / (150*150);

@@ -162,12 +162,10 @@ int main(){
             renderLightCube(VAOLightCube, cubeShader, mainCamera, pointLightPosition);
         }
 
-      //  renderLamp(VAOLightCube, cubeShader, mainCamera);
 
         for(auto & pointLightPosition : pointLightPositions){
             renderModel(ourModel, modelShader, mainCamera, pointLightPosition);
         }
-
 
 
         renderSkybox(skyboxShader, VAOskybox, mainCamera, skyboxTexture);
@@ -179,11 +177,7 @@ int main(){
         glfwPollEvents();
     }
 
-    // optional: de-allocate all resources once they've outlived their purpose:
-    // ------------------------------------------------------------------------
 
-    // glfw: terminate, clearing all previously allocated GLFW resources.
-    // ------------------------------------------------------------------
     glDeleteVertexArrays(1,&VAOMapCubes);
     glDeleteVertexArrays(1,&VAOLightCube);
     glDeleteVertexArrays(1,&VAOfig);
