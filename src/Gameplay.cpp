@@ -15,10 +15,10 @@ bool isAllowedMove(std::vector<std::vector<unsigned int>> matrica, int i, int j)
     return true;
 }
 
-void pm_key_callback(GLFWwindow *window, int key, int scancode, int action, int mods){
+void movingKeyCallback(GLFWwindow *window, int key, int scancode, int action, int mods){
 
-    int i = currPos.first;
-    int j = currPos.second;
+    int i = pacmanPos.first;
+    int j = pacmanPos.second;
 
     bool moved = false;
     bool ind = false;
@@ -32,7 +32,7 @@ void pm_key_callback(GLFWwindow *window, int key, int scancode, int action, int 
             if(outMatrix[i - 1][j] == FOOD_BOX)
                 brPoena++;
             outMatrix[i][j] = NO_BOX;
-            currPos = std::make_pair(i-1,j);
+            pacmanPos = std::make_pair(i - 1, j);
             pacmanRotation = 1;
             moved = true;
         }
@@ -43,7 +43,7 @@ void pm_key_callback(GLFWwindow *window, int key, int scancode, int action, int 
             if(outMatrix[i + 1][j] == 2)
                 brPoena++;
             outMatrix[i][j] = 7;
-            currPos = std::make_pair(i+1,j);
+            pacmanPos = std::make_pair(i + 1, j);
             pacmanRotation = 3;
             moved = true;
         }
@@ -52,7 +52,7 @@ void pm_key_callback(GLFWwindow *window, int key, int scancode, int action, int 
     }
     else if(key == GLFW_KEY_LEFT  && action == GLFW_PRESS){
         if(i == 9 && j == 0){
-            currPos = std::make_pair(9,20);
+            pacmanPos = std::make_pair(9, 20);
             outMatrix[i][j] = NO_BOX;
             pacmanRotation = 2;
             ind = true;
@@ -61,7 +61,7 @@ void pm_key_callback(GLFWwindow *window, int key, int scancode, int action, int 
             if(outMatrix[i][j - 1] == 2)
                 brPoena++;
             outMatrix[i][j] = 7;
-            currPos = std::make_pair(i,j-1);
+            pacmanPos = std::make_pair(i, j - 1);
             pacmanRotation = 2;
             ind = true;
         }
@@ -73,7 +73,7 @@ void pm_key_callback(GLFWwindow *window, int key, int scancode, int action, int 
     }
     else if(key == GLFW_KEY_RIGHT  && action == GLFW_PRESS){
         if(i == 9 && j == 20){
-            currPos = std::make_pair(9,0);
+            pacmanPos = std::make_pair(9, 0);
             outMatrix[i][j] = 7;
             pacmanRotation = 0;
             ind = true;
@@ -83,7 +83,7 @@ void pm_key_callback(GLFWwindow *window, int key, int scancode, int action, int 
             if(outMatrix[i][j + 1] == 2)
                 brPoena++;
             outMatrix[i][j] = 7;
-            currPos = std::make_pair(i,j+1);
+            pacmanPos = std::make_pair(i, j + 1);
             pacmanRotation = 0;
             ind = true;
         }
@@ -107,26 +107,25 @@ void pm_key_callback(GLFWwindow *window, int key, int scancode, int action, int 
         }
     }
 
-    if(key == GLFW_KEY_N && action == GLFW_PRESS){
+    if(key == GLFW_KEY_N && action == GLFW_PRESS)
         newGame();
-    }
 
-    if(key == GLFW_KEY_K && action == GLFW_PRESS){
-        mainCamera.resetCamera(glm::vec3(10.0f, -10.0f, 22.0f));
-    }
+    if(key == GLFW_KEY_K && action == GLFW_PRESS)
+        mainCamera.resetCamera(glm::vec3(10.0f, -10.0f, 27.0f));
 
-    if (key == GLFW_KEY_F && action == GLFW_PRESS) {
+
+    if (key == GLFW_KEY_F && action == GLFW_PRESS)
         glfwMaximizeWindow(window);
-    }
-    if (key == GLFW_KEY_R && action == GLFW_PRESS) {
+
+    if (key == GLFW_KEY_R && action == GLFW_PRESS)
         glfwRestoreWindow(window);
-    }
+
 
 }
 
 void isEndGame(){
     for(int i = 0; i < 4; i++){
-        if(currPos.first == ghostPos[i].first && currPos.second == ghostPos[i].second){
+        if(pacmanPos.first == ghostPos[i].first && pacmanPos.second == ghostPos[i].second){
             endGame = true;
             break;
         }
@@ -137,9 +136,8 @@ void isEndGame(){
 }
 
 void restartPositions(){
-    currPos = std::make_pair(15,10);
 
-
+    pacmanPos = std::make_pair(15, 10);
 
     ghostPos[0] = std::make_pair(8, 10);
     ghostPos[1] = std::make_pair(9, 9);
@@ -152,13 +150,13 @@ void newGame(){
     restartMatrix();
     restartPositions();
 
-
     brPoena = 0;
     pacmanRotation = 0;
     lastDirGhost = {1,0,1,3};
 
     lastBox = NO_BOX;
     endGame = false;
+    mainCamera.resetCamera(glm::vec3(10.0f, -10.0f, 27.0f));
 }
 
 

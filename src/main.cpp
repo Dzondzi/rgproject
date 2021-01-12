@@ -6,7 +6,6 @@
 #include <rg/model.h>
 
 #include <rg/StartingGlfwInit.h>
-#include <rg/StartingCallbackInit.h>
 #include <rg/ourShader.h>
 #include <rg/ourTexture.h>
 #include <rg/MatrixChanges1.h>
@@ -30,7 +29,7 @@
 #define GHOST8 8
 
 
-
+void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void processInput(GLFWwindow *window);
@@ -38,7 +37,7 @@ void processInput(GLFWwindow *window);
 float deltaTime = 0.0f;	// time between current frame and last frame
 float lastFrame = 0.0f;
 
-ourCamera mainCamera(glm::vec3(10.0f, -10.0f, 22.0f));
+ourCamera mainCamera(glm::vec3(10.0f, -10.0f, 27.0f));
 
 float lastX = SCR_WIDTH / 2.0f;
 float lastY = SCR_HEIGHT /  2.0f;
@@ -47,7 +46,7 @@ bool firstMouse = true;
 int randNum;
 int brPoena = 0;
 
-std::pair<int,int> currPos;
+std::pair<int,int> pacmanPos;
 
 std::vector<std::pair<int,int>> ghostPos(4);
 
@@ -60,11 +59,14 @@ int lastBox = 7;
 
 int main(){
     ourGlfwInit();
-    ourCallbackInit();
+    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     glfwSetCursorPosCallback(window, mouse_callback);
     glfwSetScrollCallback(window, scroll_callback);
-    glfwSetKeyCallback(window, pm_key_callback);
 
+    glfwSetKeyCallback(window, movingKeyCallback);
+
+
+    glEnable(GL_DEPTH_TEST);
     srand(time(NULL));
     //ucitavanje matrice outMatrix
     initMatrix("resources/map/map01.txt");
@@ -72,12 +74,10 @@ int main(){
 
     std::vector<ourTexture> textures = loadTextures();
     std::vector<ourTexture> ghostTextures = loadGhostTextures();
-
     unsigned int skyboxTexture = loadCubemap();
 
-
-    unsigned int VAO = initBuffers();
-    unsigned int VAO2 = initEBOBuffers();
+    unsigned int VAOMapCubes = initBuffers();
+    unsigned int VAOLightCube = initEBOBuffers();
     unsigned int VAOfig = initFIGBuffers();
     unsigned int VAOskybox = initSKYBOXBuffers();
 
@@ -128,12 +128,14 @@ int main(){
     while (!glfwWindowShouldClose(window))
     {
 
-        // input
-        // -----
+
         float currentFrame = glfwGetTime();
         deltaTime = currentFrame - lastFrame;
         lastFrame = currentFrame;
 
+
+        // input
+        // -----
         processInput(window);
         mainCamera.keyboardInput(window, deltaTime);
 
@@ -146,23 +148,26 @@ int main(){
 
         for(int i = 0; i < n; i++){
             for(int j = 0; j < m; j++){
-                renderMap(i, j, outMatrix[j][i], VAO, mapShader, textures, mainCamera, pointLightPositions, numOfPointLights);
+                renderMap(i, j, outMatrix[j][i], VAOMapCubes, mapShader, textures, mainCamera, pointLightPositions, numOfPointLights);
             }
         }
 
-        renderPacman(currPos, VAOfig, pacmanShader, pacmanTexture, mainCamera, pointLightPositions, numOfPointLights, pacmanRotation);
+        renderPacman(pacmanPos, VAOfig, pacmanShader, pacmanTexture, mainCamera, pointLightPositions, numOfPointLights, pacmanRotation);
 
         for(int i = 0; i < 4; i++){
             renderGhost(i, ghostShader, VAOfig, ghostPos, mainCamera, pointLightPositions, numOfPointLights, ghostTextures);
         }
 
         for(auto & pointLightPosition : pointLightPositions){
-            renderLightCube(VAO2, cubeShader, mainCamera, pointLightPosition);
+            renderLightCube(VAOLightCube, cubeShader, mainCamera, pointLightPosition);
         }
+
+      //  renderLamp(VAOLightCube, cubeShader, mainCamera);
 
         for(auto & pointLightPosition : pointLightPositions){
             renderModel(ourModel, modelShader, mainCamera, pointLightPosition);
         }
+
 
 
         renderSkybox(skyboxShader, VAOskybox, mainCamera, skyboxTexture);
@@ -179,9 +184,10 @@ int main(){
 
     // glfw: terminate, clearing all previously allocated GLFW resources.
     // ------------------------------------------------------------------
-    glDeleteVertexArrays(1,&VAO);
-    glDeleteVertexArrays(1,&VAO2);
+    glDeleteVertexArrays(1,&VAOMapCubes);
+    glDeleteVertexArrays(1,&VAOLightCube);
     glDeleteVertexArrays(1,&VAOfig);
+    glDeleteVertexArrays(1,&VAOskybox);
 
     glfwTerminate();
     return 0;
@@ -217,3 +223,11 @@ void processInput(GLFWwindow *window)
         glfwSetWindowShouldClose(window, true);
 
 }
+void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+{
+    // make sure the viewport matches the new window dimensions; note that width and
+    // height will be significantly larger than specified on retina displays.
+    glViewport(0, 0, width, height);
+}
+
+

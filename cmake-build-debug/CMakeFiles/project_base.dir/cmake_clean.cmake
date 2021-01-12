@@ -6,7 +6,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/project_base.dir/src/InitBuffers.cpp.o"
   "CMakeFiles/project_base.dir/src/LoadTextures.cpp.o"
   "CMakeFiles/project_base.dir/src/MatrixChanges1.cpp.o"
-  "CMakeFiles/project_base.dir/src/StartingCallbackInit.cpp.o"
   "CMakeFiles/project_base.dir/src/StartingGlfwInit.cpp.o"
   "CMakeFiles/project_base.dir/src/main.cpp.o"
 )

@@ -30,7 +30,6 @@ void ourGlfwInit(){
 
     glfwMakeContextCurrent(window);
 
-
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 
@@ -39,8 +38,7 @@ void ourGlfwInit(){
         exit(EXIT_FAILURE);
     }
 
-    glEnable(GL_DEPTH_TEST);
-    stbi_set_flip_vertically_on_load(true);
+
 }
 
 

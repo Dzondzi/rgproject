@@ -58,13 +58,6 @@ CMakeFiles/project_base.dir/src/MatrixChanges1.cpp.o: ../libs/glad/include/glad/
 CMakeFiles/project_base.dir/src/MatrixChanges1.cpp.o: ../src/MatrixChanges1.cpp
 CMakeFiles/project_base.dir/src/MatrixChanges1.cpp.o: configuration/root_directory.h
 
-CMakeFiles/project_base.dir/src/StartingCallbackInit.cpp.o: ../include/rg/StartingCallbackInit.h
-CMakeFiles/project_base.dir/src/StartingCallbackInit.cpp.o: ../include/rg/StartingGlfwInit.h
-CMakeFiles/project_base.dir/src/StartingCallbackInit.cpp.o: ../include/stb_image.h
-CMakeFiles/project_base.dir/src/StartingCallbackInit.cpp.o: ../libs/glad/include/KHR/khrplatform.h
-CMakeFiles/project_base.dir/src/StartingCallbackInit.cpp.o: ../libs/glad/include/glad/glad.h
-CMakeFiles/project_base.dir/src/StartingCallbackInit.cpp.o: ../src/StartingCallbackInit.cpp
-
 CMakeFiles/project_base.dir/src/StartingGlfwInit.cpp.o: ../include/rg/StartingGlfwInit.h
 CMakeFiles/project_base.dir/src/StartingGlfwInit.cpp.o: ../include/stb_image.h
 CMakeFiles/project_base.dir/src/StartingGlfwInit.cpp.o: ../libs/glad/include/KHR/khrplatform.h
@@ -80,7 +73,6 @@ CMakeFiles/project_base.dir/src/main.cpp.o: ../include/rg/InitBuffers.h
 CMakeFiles/project_base.dir/src/main.cpp.o: ../include/rg/LoadMatrix.h
 CMakeFiles/project_base.dir/src/main.cpp.o: ../include/rg/LoadTextures.h
 CMakeFiles/project_base.dir/src/main.cpp.o: ../include/rg/MatrixChanges1.h
-CMakeFiles/project_base.dir/src/main.cpp.o: ../include/rg/StartingCallbackInit.h
 CMakeFiles/project_base.dir/src/main.cpp.o: ../include/rg/StartingGlfwInit.h
 CMakeFiles/project_base.dir/src/main.cpp.o: ../include/rg/model.h
 CMakeFiles/project_base.dir/src/main.cpp.o: ../include/rg/ourCamera.h

@@ -32,6 +32,7 @@ void renderBox(int i, int j, int type, unsigned int VAO, ourShader shader, std::
 
 void renderLightCube(unsigned int VAO, ourShader shader,ourCamera camera, glm::vec3 pointLightPosition);
 
+void renderLamp(unsigned int VAO,ourShader shader,ourCamera camera);
 
 void renderModel(Model model, Shader shader, ourCamera camera, glm::vec3 pointLightPosition);
 

@@ -15,13 +15,14 @@ class ourTexture
     unsigned int tex;
 public:
     ourTexture(std::string path){
+
         glGenTextures(1, &tex);
         glBindTexture(GL_TEXTURE_2D, tex);
 
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
         // set texture filtering parameters
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
         int width, height, nrChannels;
@@ -38,7 +39,6 @@ public:
 
         if (data){
             glTexImage2D(GL_TEXTURE_2D, 0, type, width, height, 0, type, GL_UNSIGNED_BYTE, data);
-            //std::cout << tex << "\n";
             glGenerateMipmap(GL_TEXTURE_2D);
         }
         else{

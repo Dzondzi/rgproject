@@ -68,10 +68,10 @@ RM = /snap/clion/138/bin/cmake/linux/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/marko/Desktop/pr/rgproject
+CMAKE_SOURCE_DIR = /home/dzondzi/Desktop/grafa/rgproject
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/marko/Desktop/pr/rgproject/cmake-build-debug
+CMAKE_BINARY_DIR = /home/dzondzi/Desktop/grafa/rgproject/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -100,9 +100,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/marko/Desktop/pr/rgproject/cmake-build-debug/CMakeFiles /home/marko/Desktop/pr/rgproject/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/dzondzi/Desktop/grafa/rgproject/cmake-build-debug/CMakeFiles /home/dzondzi/Desktop/grafa/rgproject/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/marko/Desktop/pr/rgproject/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/dzondzi/Desktop/grafa/rgproject/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -344,33 +344,6 @@ src/MatrixChanges1.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/project_base.dir/build.make CMakeFiles/project_base.dir/src/MatrixChanges1.cpp.s
 .PHONY : src/MatrixChanges1.cpp.s
 
-src/StartingCallbackInit.o: src/StartingCallbackInit.cpp.o
-
-.PHONY : src/StartingCallbackInit.o
-
-# target to build an object file
-src/StartingCallbackInit.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/project_base.dir/build.make CMakeFiles/project_base.dir/src/StartingCallbackInit.cpp.o
-.PHONY : src/StartingCallbackInit.cpp.o
-
-src/StartingCallbackInit.i: src/StartingCallbackInit.cpp.i
-
-.PHONY : src/StartingCallbackInit.i
-
-# target to preprocess a source file
-src/StartingCallbackInit.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/project_base.dir/build.make CMakeFiles/project_base.dir/src/StartingCallbackInit.cpp.i
-.PHONY : src/StartingCallbackInit.cpp.i
-
-src/StartingCallbackInit.s: src/StartingCallbackInit.cpp.s
-
-.PHONY : src/StartingCallbackInit.s
-
-# target to generate assembly for a file
-src/StartingCallbackInit.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/project_base.dir/build.make CMakeFiles/project_base.dir/src/StartingCallbackInit.cpp.s
-.PHONY : src/StartingCallbackInit.cpp.s
-
 src/StartingGlfwInit.o: src/StartingGlfwInit.cpp.o
 
 .PHONY : src/StartingGlfwInit.o
@@ -455,9 +428,6 @@ help:
 	@echo "... src/MatrixChanges1.o"
 	@echo "... src/MatrixChanges1.i"
 	@echo "... src/MatrixChanges1.s"
-	@echo "... src/StartingCallbackInit.o"
-	@echo "... src/StartingCallbackInit.i"
-	@echo "... src/StartingCallbackInit.s"
 	@echo "... src/StartingGlfwInit.o"
 	@echo "... src/StartingGlfwInit.i"
 	@echo "... src/StartingGlfwInit.s"

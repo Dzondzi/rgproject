@@ -67,6 +67,7 @@ std::vector<ourTexture> loadGhostTextures(){
 
 
 std::vector<ourTexture> loadTextures(){
+
     std::vector<ourTexture> textures;
 
     ourTexture tex0("resources/textures/container.jpg");
